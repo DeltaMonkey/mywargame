@@ -21,7 +21,9 @@ size = Vector2(3, 8)
 collision_layer = 2
 script = ExtResource("1_4c34j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="SpriteContainer" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteContainer"]
 sprite_frames = SubResource("SpriteFrames_gfjmf")
 animation = &"idle"
 autoplay = "idle"

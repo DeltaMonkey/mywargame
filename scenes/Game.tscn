@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=7 format=3 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/tileset/brown_block.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
-[ext_resource type="PackedScene" uid="uid://cyeha5447d6vs" path="res://scenes/CollectableGun.tscn" id="3_b5172"]
+[ext_resource type="PackedScene" uid="uid://cyeha5447d6vs" path="res://scenes/Guns/Collectable/AssaultRifle_Collectable.tscn" id="3_b5172"]
+[ext_resource type="PackedScene" uid="uid://cpr5x1j62pg8n" path="res://scenes/Guns/Collectable/Pistol_Collectable.tscn" id="3_qu145"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -28,7 +29,10 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("1_ycufs")]
-position = Vector2(69, 38)
+position = Vector2(52, 45)
 
-[node name="CollectableGun" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(97, 51)
+[node name="Pistol_Collectable" parent="." instance=ExtResource("3_qu145")]
+position = Vector2(16, 49)
+
+[node name="AssaultRifle_Collectable" parent="." instance=ExtResource("3_b5172")]
+position = Vector2(117, 48)
