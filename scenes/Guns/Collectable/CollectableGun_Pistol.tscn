@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpr5x1j62pg8n"]
 
-[ext_resource type="Script" path="res://scripts/Pistol_Collectable.gd" id="1_ga8v2"]
+[ext_resource type="Script" path="res://scripts/CollectableGun_Pistol.gd" id="1_pcp0l"]
 [ext_resource type="Texture2D" uid="uid://dt35x7anihtye" path="res://assets/sprites/guns/pistol/pistol_gun.png" id="2_hg24c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qn3bp"]
 size = Vector2(5, 4)
 
-[node name="Pistol_Collectable" type="Area2D"]
+[node name="CollectableGun_Pistol" type="Area2D"]
 collision_mask = 2
-script = ExtResource("1_ga8v2")
+script = ExtResource("1_pcp0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, 0)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd0nw1jarc6go"]
+
+[ext_resource type="Script" path="res://scripts/Projectile_AssaultRifle.gd" id="1_jenwu"]
+[ext_resource type="Texture2D" uid="uid://ca7pfn6hhq15k" path="res://assets/sprites/guns/assault_rifle/assault_rifle_projectile.png" id="2_xatwp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i64r"]
+size = Vector2(2, 1)
+
+[node name="Projectile_AssaultRifle" type="Area2D"]
+script = ExtResource("1_jenwu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_6i64r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("2_xatwp")

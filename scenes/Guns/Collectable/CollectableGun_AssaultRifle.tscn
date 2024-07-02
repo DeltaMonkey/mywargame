@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyeha5447d6vs"]
 
 [ext_resource type="Texture2D" uid="uid://du3akrao7ks0f" path="res://assets/sprites/guns/assault_rifle/assault_rifle.png" id="1_1cm1r"]
-[ext_resource type="Script" path="res://scripts/AssaultRifle_Collectable.gd" id="1_j56pm"]
+[ext_resource type="Script" path="res://scripts/CollectableGun_AssaultRifle.gd" id="1_hgmdn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qn3bp"]
 size = Vector2(7, 4)
 
-[node name="AssaultRifle_Collectable" type="Area2D"]
+[node name="CollectableGun_AssaultRifle" type="Area2D"]
 collision_mask = 2
-script = ExtResource("1_j56pm")
+script = ExtResource("1_hgmdn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1cm1r")

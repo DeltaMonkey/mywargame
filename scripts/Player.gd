@@ -8,7 +8,7 @@ const JUMP_VELOCITY = -150.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var equipped_gun;
+var equipped_gun: BaseGun;
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -32,7 +32,15 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func equip_gun(gun_to_collect):
-	equipped_gun = gun_to_collect.instantiate()
+	#Handle shoot
+	if Input.is_action_just_pressed("ui_accept"):
+		self.shoot()
+
+func equip_gun(gun_to_collect: PackedScene):
+	equipped_gun = gun_to_collect.instantiate() as BaseGun;
 	sprite_container.add_child(equipped_gun)
 	print("gun equipped")
+
+func shoot():
+	if(equipped_gun):
+		equipped_gun.shoot(sprite_container.scale.x);
