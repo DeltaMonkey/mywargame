@@ -34,7 +34,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	#Handle shoot
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_accept"):
 		self.Shoot()
 
 func EquipGun(gunToCollect: PackedScene):

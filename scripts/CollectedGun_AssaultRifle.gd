@@ -3,11 +3,11 @@ class_name CollectedGun_AssaultRifle extends BaseGun
 const PROJECTILE_ASSAULT_RIFLE = preload("res://scenes/Guns/Projectiles/Projectile_AssaultRifle.tscn")
 const BULLET_COUNT: int = 30
 
-@onready var MuzzleNode = $Muzzle
+@onready var muzzle_node = $Muzzle
+@onready var shoot_cooldown_timer = $ShootCooldownTimer
 
 func _ready():
-	InitiateGun(PROJECTILE_ASSAULT_RIFLE, MuzzleNode, BULLET_COUNT)
+	InitiateGun(PROJECTILE_ASSAULT_RIFLE, muzzle_node, shoot_cooldown_timer,BULLET_COUNT)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func Shoot(direction: int) -> int:
+	return super(direction)

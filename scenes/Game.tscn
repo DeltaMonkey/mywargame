@@ -29,16 +29,16 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("1_ycufs")]
-position = Vector2(52, 45)
+position = Vector2(15, 40)
 
 [node name="Pistol_Collectable" parent="." instance=ExtResource("3_qu145")]
-position = Vector2(16, 49)
+position = Vector2(56, 52)
 
 [node name="AssaultRifle_Collectable" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(117, 48)
+position = Vector2(117, 52)
 
 [node name="AssaultRifle_Collectable2" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(104, 48)
+position = Vector2(104, 52)
 
 [node name="AssaultRifle_Collectable3" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(90, 48)
+position = Vector2(90, 52)
