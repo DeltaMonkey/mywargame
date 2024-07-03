@@ -1,10 +1,12 @@
-extends BaseProjectile
+class_name Projectile_Pistol extends BaseProjectile
 
 const SPEED: int = 150;
+const DAMAGE: int = 1;
+
 @onready var destroy_bullet_timer = $DestroyBulletTimer
 
 func _ready():
-	InitiateProjectile(SPEED, destroy_bullet_timer);
+	InitiateProjectile(SPEED, DAMAGE, destroy_bullet_timer);
 	super()
 
 func _process(delta):

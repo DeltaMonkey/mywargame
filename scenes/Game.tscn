@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=8 format=3 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/tileset/brown_block.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
 [ext_resource type="PackedScene" uid="uid://cyeha5447d6vs" path="res://scenes/Guns/Collectable/CollectableGun_AssaultRifle.tscn" id="3_b5172"]
 [ext_resource type="PackedScene" uid="uid://cpr5x1j62pg8n" path="res://scenes/Guns/Collectable/CollectableGun_Pistol.tscn" id="3_qu145"]
+[ext_resource type="PackedScene" uid="uid://b075hic5laxks" path="res://scenes/Enemy.tscn" id="5_okm46"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -15,7 +16,8 @@ texture_region_size = Vector2i(8, 8)
 
 [sub_resource type="TileSet" id="TileSet_wpaav"]
 tile_size = Vector2i(8, 8)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 9
 sources/0 = SubResource("TileSetAtlasSource_tiy31")
 
 [node name="Game" type="Node2D"]
@@ -42,3 +44,6 @@ position = Vector2(104, 52)
 
 [node name="AssaultRifle_Collectable3" parent="." instance=ExtResource("3_b5172")]
 position = Vector2(90, 52)
+
+[node name="Enemy" parent="." instance=ExtResource("5_okm46")]
+position = Vector2(137, 39)

@@ -7,7 +7,7 @@ const BULLET_COUNT: int = 30
 @onready var shoot_cooldown_timer = $ShootCooldownTimer
 
 func _ready():
-	InitiateGun(PROJECTILE_ASSAULT_RIFLE, muzzle_node, shoot_cooldown_timer,BULLET_COUNT)
+	InitiateGun(PROJECTILE_ASSAULT_RIFLE, muzzle_node, shoot_cooldown_timer, BULLET_COUNT)
 
 func Shoot(direction: int) -> int:
 	return super(direction)

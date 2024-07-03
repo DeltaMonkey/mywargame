@@ -28,7 +28,8 @@ func Shoot(direction: int) -> int:
 		
 		ShootCooldownTimer.start()
 		
-		var bullet: BaseProjectile = ProjectileBase.instantiate() as BaseProjectile
+		var bullet_instance = ProjectileBase.instantiate();
+		var bullet: BaseProjectile = bullet_instance as BaseProjectile
 		bullet.set_scale(Vector2(direction, 1))
 		bullet.Direction = direction
 		bullet.global_position = Muzzle.global_position
