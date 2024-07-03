@@ -16,3 +16,7 @@ shape = SubResource("RectangleShape2D_6i64r")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
 texture = ExtResource("2_3d2sk")
+
+[node name="DestroyBulletTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

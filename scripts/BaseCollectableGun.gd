@@ -1,10 +1,10 @@
 class_name BaseCollectableGun extends Area2D
 
-var collectable_gun: PackedScene;
+var CollectableGun: PackedScene;
 
 func _ready():
 	connect("body_entered", on_body_entered)
 
 func on_body_entered(body: BasePlayer) -> void:
-	body.equip_gun(collectable_gun)
+	body.EquipGun(CollectableGun)
 	queue_free()

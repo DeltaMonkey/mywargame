@@ -4,4 +4,4 @@ const ASSAULT_RIFLE_COLLECTED_GUN = preload("res://scenes/Guns/Collected/Collect
 
 func _ready():
 	super()
-	collectable_gun = ASSAULT_RIFLE_COLLECTED_GUN
+	CollectableGun = ASSAULT_RIFLE_COLLECTED_GUN
