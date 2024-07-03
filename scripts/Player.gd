@@ -2,6 +2,7 @@ class_name BasePlayer extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
+const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
 
 @onready var SpriteContainer = $SpriteContainer as Node2D
 
@@ -37,10 +38,15 @@ func _physics_process(delta):
 		self.Shoot()
 
 func EquipGun(gunToCollect: PackedScene):
+	if EquippedGun != null:
+		EquippedGun.queue_free()
+		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
 	SpriteContainer.add_child(EquippedGun)
-	print("gun equipped")
 
 func Shoot():
 	if(EquippedGun):
-		EquippedGun.Shoot(SpriteContainer.scale.x);
+		var remainingBullet = EquippedGun.Shoot(SpriteContainer.scale.x);
+		
+		if(remainingBullet == 0):
+			EquipGun(COLLECTED_GUN_DEFAULT)
