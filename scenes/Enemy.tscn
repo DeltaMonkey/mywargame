@@ -1,17 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://b075hic5laxks"]
+[gd_scene load_steps=10 format=3 uid="uid://b075hic5laxks"]
 
-[ext_resource type="Texture2D" uid="uid://drpglofkd7ch5" path="res://assets/sprites/red_player/player_red.png" id="1_3n3g1"]
 [ext_resource type="Script" path="res://scripts/BaseEnemy.gd" id="1_4k8t0"]
+[ext_resource type="Texture2D" uid="uid://dh6khxjhkdmpd" path="res://assets/sprites/red_player/player_red_spritesheet.png" id="2_58yv5"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_feu3h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkqp2"]
+atlas = ExtResource("2_58yv5")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u2qq"]
+atlas = ExtResource("2_58yv5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb8q3"]
+atlas = ExtResource("2_58yv5")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeuxj"]
+atlas = ExtResource("2_58yv5")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bw0v"]
+atlas = ExtResource("2_58yv5")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d84h7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3n3g1")
+"texture": SubResource("AtlasTexture_bkqp2")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u2qq")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb8q3")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeuxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bw0v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfo3w"]
@@ -25,9 +72,10 @@ script = ExtResource("1_4k8t0")
 [node name="SpriteContainer" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteContainer"]
-sprite_frames = SubResource("SpriteFrames_feu3h")
-animation = &"idle"
+sprite_frames = SubResource("SpriteFrames_d84h7")
+animation = &"hurt"
 autoplay = "idle"
+offset = Vector2(0.5, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gfo3w")

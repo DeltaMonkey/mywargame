@@ -39,11 +39,5 @@ position = Vector2(56, 52)
 [node name="AssaultRifle_Collectable" parent="." instance=ExtResource("3_b5172")]
 position = Vector2(117, 52)
 
-[node name="AssaultRifle_Collectable2" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(104, 52)
-
-[node name="AssaultRifle_Collectable3" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(90, 52)
-
 [node name="Enemy" parent="." instance=ExtResource("5_okm46")]
 position = Vector2(137, 39)

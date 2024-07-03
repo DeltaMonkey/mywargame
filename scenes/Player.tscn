@@ -1,17 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://d36v0cr3tix7x"]
+[gd_scene load_steps=10 format=3 uid="uid://d36v0cr3tix7x"]
 
-[ext_resource type="Texture2D" uid="uid://c1x1stmg0etmr" path="res://assets/sprites/blue_player/player_blue.png" id="1_1xcw6"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_4c34j"]
+[ext_resource type="Texture2D" uid="uid://dw21ilk7s278o" path="res://assets/sprites/blue_player/player_blue_spritesheet.png" id="2_gmstn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63nal"]
+atlas = ExtResource("2_gmstn")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj685"]
+atlas = ExtResource("2_gmstn")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_invm0"]
+atlas = ExtResource("2_gmstn")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6658"]
+atlas = ExtResource("2_gmstn")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybmtb"]
+atlas = ExtResource("2_gmstn")
+region = Rect2(24, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gfjmf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1xcw6")
+"texture": SubResource("AtlasTexture_63nal")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj685")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_invm0")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6658")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybmtb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8iil"]
@@ -25,8 +72,9 @@ script = ExtResource("1_4c34j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteContainer"]
 sprite_frames = SubResource("SpriteFrames_gfjmf")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
+offset = Vector2(0.5, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t8iil")
