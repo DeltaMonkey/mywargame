@@ -8,6 +8,7 @@ size = Vector2(5, 4)
 
 [node name="CollectableGun_Pistol" type="Area2D"]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_pcp0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
