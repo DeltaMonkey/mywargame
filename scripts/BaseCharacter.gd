@@ -84,3 +84,6 @@ func Shoot():
 		
 		if(remainingBullet == 0 and CollectedDefaultGun != null):
 			EquipGun(CollectedDefaultGun)
+
+func Jump():
+	velocity.y = JumpVelocity

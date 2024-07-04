@@ -62,7 +62,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8iil"]
-size = Vector2(3, 8)
+size = Vector2(3, 7)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 26
@@ -77,4 +77,5 @@ autoplay = "idle"
 offset = Vector2(0.5, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_t8iil")

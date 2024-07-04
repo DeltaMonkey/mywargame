@@ -62,7 +62,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfo3w"]
-size = Vector2(3, 8)
+size = Vector2(3, 7)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
@@ -78,6 +78,7 @@ autoplay = "idle"
 offset = Vector2(0.5, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gfo3w")
 
 [node name="TimerToMove" type="Timer" parent="."]
@@ -86,3 +87,21 @@ autostart = true
 
 [node name="TimerToWait" type="Timer" parent="."]
 one_shot = true
+
+[node name="RayCastWallRight" type="RayCast2D" parent="."]
+target_position = Vector2(2, 0)
+collision_mask = 24
+
+[node name="RayCastWallLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-2, 0)
+collision_mask = 24
+
+[node name="RayCastWallJumpRight" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(4, 0)
+collision_mask = 17
+
+[node name="RayCastWallJumpLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(-4, 0)
+collision_mask = 16
