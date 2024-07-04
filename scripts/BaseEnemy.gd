@@ -12,8 +12,10 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 
 @onready var ray_cast_wall_right: RayCast2D = $RayCastWallRight as RayCast2D
 @onready var ray_cast_wall_left: RayCast2D = $RayCastWallLeft as RayCast2D
-@onready var ray_cast_wall_jump_right = $RayCastWallJumpRight
-@onready var ray_cast_wall_jump_left = $RayCastWallJumpLeft
+@onready var ray_cast_wall_jump_right: RayCast2D = $RayCastWallJumpRight as RayCast2D
+@onready var ray_cast_wall_jump_left: RayCast2D = $RayCastWallJumpLeft as RayCast2D
+@onready var ray_cast_stop_wall_jump_right: RayCast2D = $RayCastStopWallJumpRight as RayCast2D
+@onready var ray_cast_stop_wall_jump_left: RayCast2D = $RayCastStopWallJumpLeft as RayCast2D
 
 
 @export var SecondToMove: float = 3
@@ -42,12 +44,6 @@ func _ready():
 func _physics_process(delta):
 	ApplyGravity(delta)
 	
-	if (Direction != 0 and
-	 		(ray_cast_wall_jump_left.is_colliding() or ray_cast_wall_jump_right.is_colliding())):
-		# Prints a random integer between 0 and 99.
-		if(JumpRandom.randi() % 100 > 75):
-			Jump()
-	
 	MoveTowardsDirection(Direction)
 	
 	if ray_cast_wall_right.is_colliding():
@@ -69,10 +65,25 @@ func _physics_process(delta):
 	if Direction > 0:
 		ray_cast_wall_jump_right.enabled = true
 		ray_cast_wall_jump_left.enabled = false
+		
+		ray_cast_stop_wall_jump_right.enabled = true
+		ray_cast_stop_wall_jump_left.enabled = false
+		
 	elif Direction < 0:
 		ray_cast_wall_jump_right.enabled = false
 		ray_cast_wall_jump_left.enabled = true
 		
+		ray_cast_stop_wall_jump_right.enabled = false
+		ray_cast_stop_wall_jump_left.enabled = true
+	else:
+		ray_cast_wall_jump_right.enabled = false
+		ray_cast_wall_jump_left.enabled = false
+		
+		ray_cast_stop_wall_jump_right.enabled = false
+		ray_cast_stop_wall_jump_left.enabled = false
+	
+	CalculateJump()
+
 func TimeToWait():
 	PreviousDirection = Direction
 	Direction = 0
@@ -81,3 +92,38 @@ func TimeToWait():
 func TimeToWalk():
 	Direction = PreviousDirection * -1;
 	timer_to_move.start()
+
+var JumpRequestCount = 0
+
+func CalculateJump():
+	var stopToRightWallCollided = ray_cast_stop_wall_jump_right.is_colliding()
+	var stopToLeftWallCollided = ray_cast_stop_wall_jump_left.is_colliding()
+		
+	if (is_on_floor() and Direction != 0 and
+	 		(ray_cast_wall_jump_left.is_colliding() or ray_cast_wall_jump_right.is_colliding())
+			and 
+			(!stopToLeftWallCollided and !stopToRightWallCollided)):
+				
+		# Prints a random integer between 0 and 2.
+		JumpRandom.randomize()
+		var possibilityOfWallJump = JumpRandom.randf_range(0, 3);
+		if(possibilityOfWallJump > 1 and JumpRequestCount == 0):
+			Jump()
+			
+		JumpRequestCount = JumpRequestCount + 1
+	else:
+		JumpRequestCount = 0;
+	#elif (is_on_floor() and Direction != 0 and
+			#(
+				#(ray_cast_jump_across_right.enabled == true and rightcrosscollide == false and ray_cast_jump_across_left.enabled == false and leftcrosscollide == false) or 
+				#(ray_cast_jump_across_left.enabled == true and leftcrosscollide == false and ray_cast_jump_across_right.enabled == false and rightcrosscollide == false)
+			#)
+		#):
+		## Prints a random integer between 0 and 99.
+		#if(JumpRandom.randi() % 100 > 98):
+			#Jump()
+	#
+	##it was too slow
+	#if !is_on_floor():
+		#Speed = SPEED * 2
+	#else: Speed = SPEED
