@@ -70,13 +70,17 @@ collision_mask = 22
 script = ExtResource("1_4k8t0")
 SecondToMove = 2.0
 
-[node name="SpriteContainer" type="Node2D" parent="."]
+[node name="DirectionContainer" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteContainer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionContainer"]
 sprite_frames = SubResource("SpriteFrames_d84h7")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0.5, 0)
+
+[node name="RaycastEnemyDedector" type="RayCast2D" parent="DirectionContainer"]
+target_position = Vector2(30, 0)
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -103,7 +107,7 @@ target_position = Vector2(1, 0)
 collision_mask = 16
 
 [node name="RayCastWallJumpLeft" type="RayCast2D" parent="."]
-position = Vector2(-2, -1)
+position = Vector2(0, -2)
 target_position = Vector2(-1, 0)
 collision_mask = 16
 
@@ -116,3 +120,16 @@ collision_mask = 16
 position = Vector2(-1, -6)
 target_position = Vector2(-3, 0)
 collision_mask = 16
+
+[node name="TimerShootTime" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerCooldownTime" type="Timer" parent="."]
+
+[node name="TimerToAlert" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="TimerShootTime" to="." method="_on_timer_shoot_time_timeout"]
+[connection signal="timeout" from="TimerCooldownTime" to="." method="_on_timer_cooldown_time_timeout"]
+[connection signal="timeout" from="TimerToAlert" to="." method="_on_timer_to_alert_timeout"]

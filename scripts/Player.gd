@@ -4,15 +4,15 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
 const COLLECTED_GUN_DEFAULT: PackedScene = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
 
-@onready var sprite_container = $SpriteContainer as Node2D
-@onready var animated_sprite_2d = $SpriteContainer/AnimatedSprite2D as AnimatedSprite2D
+@onready var direction_container = $DirectionContainer as Node2D
+@onready var animated_sprite_2d = $DirectionContainer/AnimatedSprite2D as AnimatedSprite2D
 
 func _ready():
 	InitilizeCharacter(
 		SPEED, 
 		JUMP_VELOCITY, 
 		animated_sprite_2d, 
-		sprite_container,
+		direction_container,
 		COLLECTED_GUN_DEFAULT)
 
 func _physics_process(delta: float):

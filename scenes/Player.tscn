@@ -68,9 +68,9 @@ size = Vector2(3, 7)
 collision_mask = 18
 script = ExtResource("1_4c34j")
 
-[node name="SpriteContainer" type="Node2D" parent="."]
+[node name="DirectionContainer" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteContainer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionContainer"]
 sprite_frames = SubResource("SpriteFrames_gfjmf")
 animation = &"idle"
 autoplay = "idle"

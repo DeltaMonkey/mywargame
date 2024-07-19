@@ -1,6 +1,6 @@
 class_name Projectile_AssaultRifle extends BaseProjectile
 
-const SPEED: int = 200;
+const SPEED: float = 200;
 const DAMAGE: int = 2;
 
 @onready var destroy_bullet_timer = $DestroyBulletTimer

@@ -1,6 +1,6 @@
 class_name Projectile_Pistol extends BaseProjectile
 
-const SPEED: int = 150;
+const SPEED: float = 150.0;
 const DAMAGE: int = 1;
 
 @onready var destroy_bullet_timer = $DestroyBulletTimer

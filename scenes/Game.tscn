@@ -22,7 +22,7 @@ sources/0 = SubResource("TileSetAtlasSource_tiy31")
 
 [node name="Game" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["wall"]]
 tile_set = SubResource("TileSet_wpaav")
 format = 2
 layer_0/name = "Background"
@@ -34,10 +34,10 @@ layer_1/tile_data = PackedInt32Array()
 position = Vector2(15, 40)
 
 [node name="Pistol_Collectable" parent="." instance=ExtResource("3_qu145")]
-position = Vector2(56, 52)
+position = Vector2(103, 27)
 
 [node name="AssaultRifle_Collectable" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(117, 52)
+position = Vector2(68, 51)
 
 [node name="Enemy" parent="." instance=ExtResource("5_okm46")]
 position = Vector2(92, 28)

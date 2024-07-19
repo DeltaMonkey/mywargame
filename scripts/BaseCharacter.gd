@@ -4,7 +4,7 @@ var Speed: int = 100
 var JumpVelocity: int = -150
 var Health: int = 10
 var AnimatedSprite2D_Node: AnimatedSprite2D
-var SpriteContainer_Node: Node2D
+var DirectionContainer_Node: Node2D
 var EquippedGun: BaseGun;
 var CollectedDefaultGun: PackedScene;
 
@@ -15,13 +15,13 @@ func InitilizeCharacter(
 	speed: int,
 	jumpVelocity: int,
 	animatedAprite2D: AnimatedSprite2D, 
-	spriteContainer_Node: Node2D,
+	directionContainer_Node: Node2D,
 	collectedDefaultGun: PackedScene):
 		
 	Speed = speed
 	JumpVelocity = jumpVelocity
 	AnimatedSprite2D_Node = animatedAprite2D
-	SpriteContainer_Node = spriteContainer_Node
+	DirectionContainer_Node = directionContainer_Node
 	CollectedDefaultGun = collectedDefaultGun
 
 func TakeDamage(damage: int):
@@ -48,8 +48,8 @@ func ApplyGravity(delta: float):
 
 func MoveTowardsDirection(direction: float):
 	if direction:
-		if direction > 0 and SpriteContainer_Node.scale != Vector2(1, 1): SpriteContainer_Node.set_scale(Vector2(1, 1))
-		elif direction < 0 and SpriteContainer_Node.scale != Vector2(-1, 1): SpriteContainer_Node.set_scale(Vector2(-1, 1))
+		if direction > 0 and DirectionContainer_Node.scale != Vector2(1, 1): DirectionContainer_Node.set_scale(Vector2(1, 1))
+		elif direction < 0 and DirectionContainer_Node.scale != Vector2(-1, 1): DirectionContainer_Node.set_scale(Vector2(-1, 1))
 		
 		velocity.x = direction * Speed
 	else:
@@ -76,11 +76,11 @@ func EquipGun(gunToCollect: PackedScene):
 		EquippedGun.queue_free()
 		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
-	SpriteContainer_Node.add_child(EquippedGun)
+	DirectionContainer_Node.add_child(EquippedGun)
 
 func Shoot():
 	if(EquippedGun):
-		var remainingBullet = EquippedGun.Shoot(SpriteContainer_Node.scale.x);
+		var remainingBullet = EquippedGun.Shoot(DirectionContainer_Node.scale.x);
 		
 		if(remainingBullet == 0 and CollectedDefaultGun != null):
 			EquipGun(CollectedDefaultGun)

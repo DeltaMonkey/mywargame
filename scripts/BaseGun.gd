@@ -16,6 +16,7 @@ func InitiateGun(
 	Muzzle = muzzle
 	BulletCount = bulletCount
 	ShootCooldownTimer = shootCooldownTimer
+	
 
 ## returns remaining bullet count
 ## -1 is infinite bullet
@@ -30,9 +31,19 @@ func Shoot(direction: int) -> int:
 		
 		var bullet_instance = ProjectileBase.instantiate();
 		var bullet: BaseProjectile = bullet_instance as BaseProjectile
+		
 		bullet.set_scale(Vector2(direction, 1))
 		bullet.Direction = direction
+		
+		if(get_parent().get_parent().is_in_group("enemy")):
+			bullet.IsGunOnEnemyHands = true
+		elif(get_parent().get_parent().is_in_group("player")):
+			bullet.IsGunOnEnemyHands = false
+		
 		bullet.global_position = Muzzle.global_position
+		
+
+			
 		get_tree().get_root().add_child(bullet)
 	
 	return BulletCount
