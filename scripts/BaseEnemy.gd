@@ -94,10 +94,10 @@ func _physics_process(delta):
 	
 	if(raycast_enemy_dedector.is_colliding()):
 		var collision = raycast_enemy_dedector.get_collider() as Node
+		
 		if (timer_shoot_time.time_left > 0 && !collision.is_in_group('wall')):
 			IsAlertModeOn = true;
 			velocity.x = 0
-			velocity.y = 0
 			Shoot()
 		else:
 			IsShootTime = true
