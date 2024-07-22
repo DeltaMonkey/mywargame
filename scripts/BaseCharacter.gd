@@ -68,8 +68,6 @@ func MoveTowardsDirection(direction: float):
 	animationName = AnimatedSprite2D_Node.animation;
 	if !is_on_floor() and animationName != 'jump' and animationName != 'hurt':
 		AnimatedSprite2D_Node.play('jump')
-		
-	move_and_slide()
 
 func EquipGun(gunToCollect: PackedScene):
 	if EquippedGun != null:

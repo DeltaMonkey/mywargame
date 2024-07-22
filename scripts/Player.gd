@@ -1,7 +1,7 @@
 class_name BasePlayer extends BaseCharacter
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -150.0
+const SPEED = 50.0
+const JUMP_VELOCITY = -175.0
 const COLLECTED_GUN_DEFAULT: PackedScene = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
 
 @onready var direction_container = $DirectionContainer as Node2D
@@ -26,7 +26,9 @@ func _physics_process(delta: float):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction: float = Input.get_axis("ui_left", "ui_right")
 	MoveTowardsDirection(direction)
-
+	
+	move_and_slide()
+	
 	#Handle shoot
 	if Input.is_action_pressed("ui_accept"):
 		Shoot()

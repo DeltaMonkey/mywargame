@@ -34,7 +34,6 @@ var PreviousDirection = 0
 var JumpRandom: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var IsAlertModeOn: bool = false;
-var IsShootTime: bool = false;
 
 func _ready():
 	InitilizeCharacter(
@@ -50,6 +49,7 @@ func _ready():
 	timer_to_wait.connect("timeout", TimeToWalk)
 
 func _physics_process(delta):
+	
 	ApplyGravity(delta)
 	
 	MoveTowardsDirection(Direction)
@@ -94,15 +94,20 @@ func _physics_process(delta):
 	
 	if(raycast_enemy_dedector.is_colliding()):
 		var collision = raycast_enemy_dedector.get_collider() as Node
-		
-		if (timer_shoot_time.time_left > 0 && !collision.is_in_group('wall')):
-			IsAlertModeOn = true;
-			velocity.x = 0
+	
+		var is_colliding_with_wall = collision.is_in_group('wall')
+	
+		if(!is_colliding_with_wall):
+			velocity.x = 0;
+			animated_sprite_2d.play('idle')
+			
+			
+		if(timer_cooldown_time.time_left == 0 && !is_colliding_with_wall):
+			timer_cooldown_time.start()
 			Shoot()
-		else:
-			IsShootTime = true
-			timer_shoot_time.start()
 
+	move_and_slide()
+	
 func TimeToWait():
 	PreviousDirection = Direction
 	Direction = 0
@@ -132,32 +137,9 @@ func CalculateJump():
 		JumpRequestCount = JumpRequestCount + 1
 	else:
 		JumpRequestCount = 0;
-	#elif (is_on_floor() and Direction != 0 and
-			#(
-				#(ray_cast_jump_across_right.enabled == true and rightcrosscollide == false and ray_cast_jump_across_left.enabled == false and leftcrosscollide == false) or 
-				#(ray_cast_jump_across_left.enabled == true and leftcrosscollide == false and ray_cast_jump_across_right.enabled == false and rightcrosscollide == false)
-			#)
-		#):
-		## Prints a random integer between 0 and 99.
-		#if(JumpRandom.randi() % 100 > 98):
-			#Jump()
-	#
-	##it was too slow
-	#if !is_on_floor():
-		#Speed = SPEED * 2
-	#else: Speed = SPEED
-
 
 func _on_timer_to_alert_timeout():
 	IsAlertModeOn = false
 	
 func Shoot():
-	if IsShootTime:
-		super()
-
-func _on_timer_shoot_time_timeout():
-	IsShootTime = false
-	timer_cooldown_time.start()
-
-func _on_timer_cooldown_time_timeout():
-	IsShootTime = true
+	super()
