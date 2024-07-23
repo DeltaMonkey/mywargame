@@ -9,8 +9,8 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 
 @onready var timer_to_move: Timer = $TimerToMove as Timer
 @onready var timer_to_wait: Timer = $TimerToWait as Timer
+@onready var timer_to_jump_cooldown = $TimerToJumpCooldown
 
-@onready var timer_shoot_time = $TimerShootTime as Timer
 @onready var timer_to_alert = $TimerToAlert as Timer
 @onready var timer_cooldown_time = $TimerCooldownTime as Timer
 
@@ -114,10 +114,16 @@ func TimeToWait():
 	timer_to_wait.start()
 
 func TimeToWalk():
+
+	if PreviousDirection == 0:
+		var possibleDirections = [-1,1]
+		var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
+		PreviousDirection = possibleDirection
+		
 	Direction = PreviousDirection * -1;
 	timer_to_move.start()
 
-var JumpRequestCount = 0
+#var JumpRequestCount = 0
 
 func CalculateJump():
 	var stopToRightWallCollided = ray_cast_stop_wall_jump_right.is_colliding()
@@ -127,16 +133,12 @@ func CalculateJump():
 	 		(ray_cast_wall_jump_left.is_colliding() or ray_cast_wall_jump_right.is_colliding())
 			and 
 			(!stopToLeftWallCollided and !stopToRightWallCollided)):
-				
-		# Prints a random integer between 0 and 2.
-		JumpRandom.randomize()
-		var possibilityOfWallJump = JumpRandom.randf_range(0, 3);
-		if(possibilityOfWallJump > 1 and JumpRequestCount == 0):
-			Jump()
 			
-		JumpRequestCount = JumpRequestCount + 1
-	else:
-		JumpRequestCount = 0;
+			
+		if(timer_to_jump_cooldown.time_left <= 0):
+			Jump()
+			timer_to_jump_cooldown.start()
+			timer_to_jump_cooldown.wait_time = randf_range(3, 6)
 
 func _on_timer_to_alert_timeout():
 	IsAlertModeOn = false
