@@ -71,4 +71,4 @@ ui_down={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.729391, 0.788075, 0.921948, 1)
+environment/defaults/default_clear_color=Color(0.124791, 0.179729, 0.322795, 1)

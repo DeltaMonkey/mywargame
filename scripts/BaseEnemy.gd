@@ -1,7 +1,7 @@
 class_name BaseEnemy extends BaseCharacter
 
 const SPEED = 15.0
-const JUMP_VELOCITY = -150.0
+const JUMP_VELOCITY = 3.0
 const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
 
 @onready var direction_container: Node2D = $DirectionContainer as Node2D
@@ -9,17 +9,12 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 
 @onready var timer_to_move: Timer = $TimerToMove as Timer
 @onready var timer_to_wait: Timer = $TimerToWait as Timer
-@onready var timer_to_jump_cooldown = $TimerToJumpCooldown
 
 @onready var timer_to_alert = $TimerToAlert as Timer
 @onready var timer_cooldown_time = $TimerCooldownTime as Timer
 
 @onready var ray_cast_wall_right: RayCast2D = $RayCastWallRight as RayCast2D
 @onready var ray_cast_wall_left: RayCast2D = $RayCastWallLeft as RayCast2D
-@onready var ray_cast_wall_jump_right: RayCast2D = $RayCastWallJumpRight as RayCast2D
-@onready var ray_cast_wall_jump_left: RayCast2D = $RayCastWallJumpLeft as RayCast2D
-@onready var ray_cast_stop_wall_jump_right: RayCast2D = $RayCastStopWallJumpRight as RayCast2D
-@onready var ray_cast_stop_wall_jump_left: RayCast2D = $RayCastStopWallJumpLeft as RayCast2D
 
 @onready var raycast_enemy_dedector = $DirectionContainer/RaycastEnemyDedector
 
@@ -34,6 +29,10 @@ var PreviousDirection = 0
 var JumpRandom: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var IsAlertModeOn: bool = false;
+
+var ReparentNode: Node
+var DeleteOldParentNodeRef: Node
+var DeleteOldParentNode: Node
 
 func _ready():
 	InitilizeCharacter(
@@ -70,26 +69,6 @@ func _physics_process(delta):
 		timer_to_move.stop()
 		timer_to_move.emit_signal("timeout")
 	
-	if Direction > 0:
-		ray_cast_wall_jump_right.enabled = true
-		ray_cast_wall_jump_left.enabled = false
-		
-		ray_cast_stop_wall_jump_right.enabled = true
-		ray_cast_stop_wall_jump_left.enabled = false
-		
-	elif Direction < 0:
-		ray_cast_wall_jump_right.enabled = false
-		ray_cast_wall_jump_left.enabled = true
-		
-		ray_cast_stop_wall_jump_right.enabled = false
-		ray_cast_stop_wall_jump_left.enabled = true
-	else:
-		ray_cast_wall_jump_right.enabled = false
-		ray_cast_wall_jump_left.enabled = false
-		
-		ray_cast_stop_wall_jump_right.enabled = false
-		ray_cast_stop_wall_jump_left.enabled = false
-	
 	CalculateJump()
 	
 	if(raycast_enemy_dedector.is_colliding()):
@@ -107,6 +86,8 @@ func _physics_process(delta):
 			Shoot()
 
 	move_and_slide()
+	DeleteOldParentNodeIfNotNull() #ReparentIfReparentNodeNotNull dan önce çalışmalı ki bir sonraki elde silsin
+	ReparentIfReparentNodeNotNull(DeleteOldParentNodeRef)
 	
 func TimeToWait():
 	PreviousDirection = Direction
@@ -114,7 +95,6 @@ func TimeToWait():
 	timer_to_wait.start()
 
 func TimeToWalk():
-
 	if PreviousDirection == 0:
 		var possibleDirections = [-1,1]
 		var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
@@ -123,25 +103,25 @@ func TimeToWalk():
 	Direction = PreviousDirection * -1;
 	timer_to_move.start()
 
-#var JumpRequestCount = 0
-
 func CalculateJump():
-	var stopToRightWallCollided = ray_cast_stop_wall_jump_right.is_colliding()
-	var stopToLeftWallCollided = ray_cast_stop_wall_jump_left.is_colliding()
-		
-	if (is_on_floor() and Direction != 0 and
-	 		(ray_cast_wall_jump_left.is_colliding() or ray_cast_wall_jump_right.is_colliding())
-			and 
-			(!stopToLeftWallCollided and !stopToRightWallCollided)):
-			
-			
-		if(timer_to_jump_cooldown.time_left <= 0):
-			Jump()
-			timer_to_jump_cooldown.start()
-			timer_to_jump_cooldown.wait_time = randf_range(3, 6)
+	pass;
 
 func _on_timer_to_alert_timeout():
 	IsAlertModeOn = false
 	
 func Shoot():
 	super()
+
+func ReparentIfReparentNodeNotNull(deleteOldParentNode: Node2D = null):
+	if ReparentNode:
+		reparent(ReparentNode)
+		ReparentNode = null
+	
+	if deleteOldParentNode:
+		DeleteOldParentNode = deleteOldParentNode
+
+func DeleteOldParentNodeIfNotNull():
+	if DeleteOldParentNode:
+		DeleteOldParentNode.queue_free()
+		DeleteOldParentNodeRef = null;
+		DeleteOldParentNode = null;
