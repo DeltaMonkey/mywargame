@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=12 format=3 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/tileset/brown_block.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
 [ext_resource type="PackedScene" uid="uid://cyeha5447d6vs" path="res://scenes/Guns/Collectable/CollectableGun_AssaultRifle.tscn" id="3_b5172"]
 [ext_resource type="PackedScene" uid="uid://cpr5x1j62pg8n" path="res://scenes/Guns/Collectable/CollectableGun_Pistol.tscn" id="3_qu145"]
 [ext_resource type="PackedScene" uid="uid://b075hic5laxks" path="res://scenes/Enemy.tscn" id="5_bgln3"]
-[ext_resource type="PackedScene" uid="uid://tyhwyy6mxfhk" path="res://scenes/Enemy_Jump_Point.tscn" id="6_8os0r"]
+[ext_resource type="PackedScene" uid="uid://tyhwyy6mxfhk" path="res://scenes/EnemyJumpPoint_Right.tscn" id="6_8os0r"]
+[ext_resource type="PackedScene" uid="uid://jwghx8g3e5t0" path="res://scenes/EnemyJumpPoint_Left.tscn" id="6_wafki"]
+[ext_resource type="PackedScene" uid="uid://btp1rnppgqoou" path="res://scenes/EnemyLongJumpPoint_Left.tscn" id="7_tbrsf"]
+[ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPoint_Right.tscn" id="9_cbnfm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -41,12 +44,16 @@ position = Vector2(103, 27)
 position = Vector2(68, 51)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(61, 51)
+position = Vector2(73, 27)
 
-[node name="EnemyJumpPoint" parent="." instance=ExtResource("6_8os0r")]
+[node name="EnemyJumpPoint_Left" parent="." instance=ExtResource("6_wafki")]
+position = Vector2(88, 56)
+
+[node name="EnemyJumpPoint_Right" parent="." instance=ExtResource("6_8os0r")]
 position = Vector2(80, 56)
 
-[node name="EnemyJumpPoint2" parent="." instance=ExtResource("6_8os0r")]
-position = Vector2(88, 56)
-scale = Vector2(-1, 1)
-Direction = -1
+[node name="EnemyLongJumpPoint_Left" parent="EnemyJumpPoint_Right" instance=ExtResource("7_tbrsf")]
+position = Vector2(0, -24)
+
+[node name="EnemyLongJumpPoint_Right" parent="EnemyJumpPoint_Right/EnemyLongJumpPoint_Left" instance=ExtResource("9_cbnfm")]
+position = Vector2(8, 0)
