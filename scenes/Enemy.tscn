@@ -108,4 +108,9 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="TimerShockToShoot" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="TimerToAlert" to="." method="_on_timer_to_alert_timeout"]
+[connection signal="timeout" from="TimerShockToShoot" to="." method="_on_timer_shock_to_shoot_timeout"]
