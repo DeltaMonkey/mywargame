@@ -20,7 +20,7 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 
 @onready var raycast_enemy_dedector = $DirectionContainer/RaycastEnemyDedector
 
-@export var SecondToMove: float = 3
+@export var SecondToMove: float = 25
 @export var SecondToWait: float = 2
 @export var SecondToMoveWhenAlerted: float = 2
 @export var SecondToWaitWhenAlerted: float = 1
