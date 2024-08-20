@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=14 format=3 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/tileset/brown_block.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://jwghx8g3e5t0" path="res://scenes/EnemyJumpPoint_Left.tscn" id="6_wafki"]
 [ext_resource type="PackedScene" uid="uid://btp1rnppgqoou" path="res://scenes/EnemyLongJumpPoint_Left.tscn" id="7_tbrsf"]
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPoint_Right.tscn" id="9_cbnfm"]
+[ext_resource type="PackedScene" uid="uid://cbjbq00buup3d" path="res://scenes/Rope.tscn" id="11_bmnqf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -66,3 +67,7 @@ position = Vector2(0, -24)
 
 [node name="EnemyLongJumpPoint_Right" parent="EnemyJumpPoint_Right/EnemyLongJumpPoint_Left" instance=ExtResource("9_cbnfm")]
 position = Vector2(8, 0)
+
+[node name="Rope" parent="." instance=ExtResource("11_bmnqf")]
+position = Vector2(72, 33)
+destination_point_y = 96
