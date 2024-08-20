@@ -25,6 +25,8 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 @export var SecondToMoveWhenAlerted: float = 2
 @export var SecondToWaitWhenAlerted: float = 1
 
+@export var StopWalking = false
+
 @export var Direction = 1;
 var PreviousDirection = 0
 
@@ -36,8 +38,10 @@ var ReparentNode: Node
 var DeleteOldParentNodeRef: Node
 var DeleteOldParentNode: Node
 
-var IsEnemyShouldDelayToShoot: bool = true
-	
+var IsEnemyShouldDelayToShoot: bool = true	
+
+var _IsStopEnemyMovementProcess_Force = false
+
 func _ready():
 	InitilizeCharacter(
 		SPEED, 
@@ -50,6 +54,11 @@ func _ready():
 	timer_to_move.wait_time = SecondToMove
 	timer_to_move.connect("timeout", TimeToWait)
 	timer_to_wait.connect("timeout", TimeToWalk)
+	
+	if _IsStopEnemyMovementProcess_Force:
+		raycast_enemy_dedector.enabled = false
+		ray_cast_wall_left.enabled = false
+		ray_cast_wall_right.enabled = false
 
 func _physics_process(delta):
 		
@@ -108,8 +117,12 @@ func TimeToWalk():
 		var possibleDirections = [-1,1]
 		var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
 		PreviousDirection = possibleDirection
+	
+	if StopWalking:
+		Direction = 0
+	else: 
+		Direction = PreviousDirection * -1;
 		
-	Direction = PreviousDirection * -1;
 	timer_to_move.start()
 	
 func CalculateJump():
@@ -154,3 +167,12 @@ func DeactivateAlertMode():
 	
 func _on_timer_shock_to_shoot_timeout():
 	Shoot()
+	
+func StopEnemyMovementProcess_Force():
+	gravity = 0
+	velocity.y = 0
+	velocity.x = 0
+	Direction = 0
+	StopWalking = true
+	_IsStopEnemyMovementProcess_Force = true
+	
