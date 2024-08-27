@@ -19,7 +19,8 @@ func _ready():
 	get_tree().get_root().get_node("Game").add_child.call_deferred(enemy)
 	
 	enemy.StopEnemyMovementProcess_Force()
-
+	enemy.SlideWithRope(OnTheRopeReleased)
+		
 func _process(delta):
 	if position.y < destination_point_y:
 		var velocity = Vector2.ZERO # The rope's movement vector.

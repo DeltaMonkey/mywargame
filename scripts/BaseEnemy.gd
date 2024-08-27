@@ -3,6 +3,7 @@ class_name BaseEnemy extends BaseCharacter
 const SPEED = 10.0
 const JUMP_VELOCITY = 4
 const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
+const ROPE_SLIDE_SPEED = 27.0
 
 @onready var direction_container: Node2D = $DirectionContainer as Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $DirectionContainer/AnimatedSprite2D as AnimatedSprite2D
@@ -19,6 +20,8 @@ const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_
 @onready var ray_cast_wall_left: RayCast2D = $RayCastWallLeft as RayCast2D
 
 @onready var raycast_enemy_dedector = $DirectionContainer/RaycastEnemyDedector
+
+@onready var enemy_collision_shape: CollisionShape2D = $CollisionShape2D
 
 @export var SecondToMove: float = 25
 @export var SecondToWait: float = 2
@@ -56,9 +59,7 @@ func _ready():
 	timer_to_wait.connect("timeout", TimeToWalk)
 	
 	if _IsStopEnemyMovementProcess_Force:
-		raycast_enemy_dedector.enabled = false
-		ray_cast_wall_left.enabled = false
-		ray_cast_wall_right.enabled = false
+		DisableCollisionAndRaygcasts()
 
 func _physics_process(delta):
 		
@@ -175,4 +176,42 @@ func StopEnemyMovementProcess_Force():
 	Direction = 0
 	StopWalking = true
 	_IsStopEnemyMovementProcess_Force = true
+	DisableCollisionAndRaygcasts()
 	
+func StartEnemyMovementProcess_Force():
+	gravity = DEFAULT_GRAVITY
+	velocity.y = 0
+	velocity.x = 0
+	Direction = 0
+	StopWalking = false
+	_IsStopEnemyMovementProcess_Force = false
+	EnableCollisionAndRaygcasts()
+	
+func SlideWithRope(Rope_OnTheRopeReleased):
+	velocity.y += 1
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * ROPE_SLIDE_SPEED
+	Rope_OnTheRopeReleased.connect(OnTheRopeReleased)
+		
+func DisableCollisionAndRaygcasts():
+	if raycast_enemy_dedector:
+		raycast_enemy_dedector.enabled = false
+	if ray_cast_wall_left:
+		ray_cast_wall_left.enabled = false
+	if ray_cast_wall_right: 
+		ray_cast_wall_right.enabled = false
+	if enemy_collision_shape: 
+		enemy_collision_shape.disabled = true
+		
+func EnableCollisionAndRaygcasts():
+	if raycast_enemy_dedector:
+		raycast_enemy_dedector.enabled = true
+	if ray_cast_wall_left:
+		ray_cast_wall_left.enabled = true
+	if ray_cast_wall_right: 
+		ray_cast_wall_right.enabled = true
+	if enemy_collision_shape: 
+		enemy_collision_shape.disabled = false
+	
+func OnTheRopeReleased():
+	StartEnemyMovementProcess_Force()

@@ -1,5 +1,7 @@
 class_name BaseCharacter extends CharacterBody2D
 
+var DEFAULT_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 var Speed: int = 100
 var JumpVelocity: int = -150
 var Health: int = 10
@@ -9,7 +11,7 @@ var EquippedGun: BaseGun;
 var CollectedDefaultGun: PackedScene;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = DEFAULT_GRAVITY
 
 func InitilizeCharacter(
 	speed: int,
