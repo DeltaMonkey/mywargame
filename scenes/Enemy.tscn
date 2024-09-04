@@ -68,6 +68,12 @@ size = Vector2(3, 7)
 collision_layer = 8
 collision_mask = 22
 script = ExtResource("1_4k8t0")
+SecondToMove = null
+SecondToWait = null
+SecondToMoveWhenAlerted = null
+SecondToWaitWhenAlerted = null
+StopWalking = null
+Direction = null
 
 [node name="DirectionContainer" type="Node2D" parent="."]
 

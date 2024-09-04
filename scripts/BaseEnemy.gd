@@ -2,8 +2,7 @@ class_name BaseEnemy extends BaseCharacter
 
 const SPEED = 10.0
 const JUMP_VELOCITY = 4
-const COLLECTED_GUN_DEFAULT = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
-const ROPE_SLIDE_SPEED = 27.0
+const ROPE_SLIDE_SPEED = 28.0
 
 @onready var direction_container: Node2D = $DirectionContainer as Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $DirectionContainer/AnimatedSprite2D as AnimatedSprite2D
@@ -30,8 +29,10 @@ const ROPE_SLIDE_SPEED = 27.0
 
 @export var StopWalking = false
 
-@export var Direction = 1;
-var PreviousDirection = 0
+@export var Direction: int = 1
+var PreviousDirection: int = 0
+
+@export var collected_gun_default = preload("res://scenes/Guns/Collected/CollectedGun_Pistol.tscn")
 
 var JumpRandom: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -43,7 +44,12 @@ var DeleteOldParentNode: Node
 
 var IsEnemyShouldDelayToShoot: bool = true	
 
-var _IsStopEnemyMovementProcess_Force = false
+var _IsStopEnemyMovementProcess_Force: bool = false
+
+var EnemyRopeSlidingDestination_Point_Y: int = 0
+var CheckEnemyRopeSlidingDestination_Point_Y: bool = false
+
+var EnemysRope: Rope
 
 func _ready():
 	InitilizeCharacter(
@@ -51,7 +57,7 @@ func _ready():
 		JUMP_VELOCITY, 
 		animated_sprite_2d, 
 		direction_container,
-		COLLECTED_GUN_DEFAULT)
+		collected_gun_default)
 		
 	timer_to_wait.wait_time = SecondToWait
 	timer_to_move.wait_time = SecondToMove
@@ -60,6 +66,8 @@ func _ready():
 	
 	if _IsStopEnemyMovementProcess_Force:
 		DisableCollisionAndRaygcasts()
+	
+	EquipGun(collected_gun_default)
 
 func _physics_process(delta):
 		
@@ -108,20 +116,25 @@ func _physics_process(delta):
 	DeleteOldParentNodeIfNotNull() #ReparentIfReparentNodeNotNull dan önce çalışmalı ki bir sonraki elde silsin
 	ReparentIfReparentNodeNotNull(DeleteOldParentNodeRef)
 	
+	if(CheckEnemyRopeSlidingDestination_Point_Y && position.y >= EnemyRopeSlidingDestination_Point_Y):
+		StartEnemyMovementProcess_Force()
+		CheckEnemyRopeSlidingDestination_Point_Y = false
+		EnemysRope.MoveStatus = Rope.MOVEMENT_STATUS.UP
+	
 func TimeToWait():
 	PreviousDirection = Direction
 	Direction = 0
 	timer_to_wait.start()
 
 func TimeToWalk():
-	if PreviousDirection == 0:
-		var possibleDirections = [-1,1]
-		var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
-		PreviousDirection = possibleDirection
-	
 	if StopWalking:
 		Direction = 0
 	else: 
+		if PreviousDirection == 0:
+			var possibleDirections = [-1,1]
+			var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
+			SetEnemyPreviousDirection(possibleDirection)
+		
 		Direction = PreviousDirection * -1;
 		
 	timer_to_move.start()
@@ -182,15 +195,19 @@ func StartEnemyMovementProcess_Force():
 	gravity = DEFAULT_GRAVITY
 	velocity.y = 0
 	velocity.x = 0
-	Direction = 0
+	Direction = PreviousDirection
 	StopWalking = false
 	_IsStopEnemyMovementProcess_Force = false
 	EnableCollisionAndRaygcasts()
 	
-func SlideWithRope(Rope_OnTheRopeReleased):
+func SlideWithRope(destination_point_y: int, Rope_OnTheRopeReleased: Signal):
 	velocity.y += 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * ROPE_SLIDE_SPEED
+	
+	EnemyRopeSlidingDestination_Point_Y = destination_point_y
+	CheckEnemyRopeSlidingDestination_Point_Y = true
+	
 	Rope_OnTheRopeReleased.connect(OnTheRopeReleased)
 		
 func DisableCollisionAndRaygcasts():
@@ -213,5 +230,18 @@ func EnableCollisionAndRaygcasts():
 	if enemy_collision_shape: 
 		enemy_collision_shape.disabled = false
 	
-func OnTheRopeReleased():
-	StartEnemyMovementProcess_Force()
+func OnTheRopeReleased(rope: Rope):
+	var possibleDirections = [-1,1]
+	var possibleDirection = possibleDirections[randi() % possibleDirections.size()]
+	SetEnemyPreviousDirection(possibleDirection)
+	EnemysRope = rope
+	EnemysRope.MoveStatus = Rope.MOVEMENT_STATUS.WAIT
+
+func SetEnemyDirection(direction: int):
+	Direction = direction
+	
+func SetEnemyPreviousDirection(direction: int):
+	PreviousDirection = direction
+	
+func GetEnemyPreviousDirection() -> int:
+	return PreviousDirection
