@@ -60,7 +60,7 @@ func MoveTowardsDirection(direction: float):
 	var animationName: StringName = AnimatedSprite2D_Node.animation;
 	if (velocity.x != 0 and 
 			animationName != 'walk' and 
-			animationName!= 'hurt'):
+			animationName != 'hurt'):
 		AnimatedSprite2D_Node.play("walk")
 	elif (velocity.x == 0 and 
 			animationName != 'idle' and 

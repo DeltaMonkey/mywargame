@@ -68,18 +68,12 @@ size = Vector2(3, 7)
 collision_layer = 8
 collision_mask = 22
 script = ExtResource("1_4k8t0")
-SecondToMove = null
-SecondToWait = null
-SecondToMoveWhenAlerted = null
-SecondToWaitWhenAlerted = null
-StopWalking = null
-Direction = null
 
 [node name="DirectionContainer" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionContainer"]
 sprite_frames = SubResource("SpriteFrames_d84h7")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
 offset = Vector2(0.5, 0)
 

@@ -1,6 +1,6 @@
 class_name BaseEnemy extends BaseCharacter
 
-const SPEED = 10.0
+const SPEED = 6.0 #should be even number to avoid shaking
 const JUMP_VELOCITY = 4
 const ROPE_SLIDE_SPEED = 28.0
 
@@ -42,7 +42,7 @@ var ReparentNode: Node
 var DeleteOldParentNodeRef: Node
 var DeleteOldParentNode: Node
 
-var IsEnemyShouldDelayToShoot: bool = true	
+var IsEnemyShouldDelayToShoot: bool = true
 
 var _IsStopEnemyMovementProcess_Force: bool = false
 
@@ -100,7 +100,8 @@ func _physics_process(delta):
 		if(!is_colliding_with_wall && is_colliding_with_player):
 			ActivateAlertMode();
 			velocity.x = 0;
-			animated_sprite_2d.play('idle')
+			if(AnimatedSprite2D_Node.animation != 'hurt'):
+				animated_sprite_2d.play('idle')
 			
 			
 		if(timer_cooldown_time.time_left == 0 && !is_colliding_with_wall && is_colliding_with_player):
