@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=15 format=4 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/tileset/brown_block.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://btp1rnppgqoou" path="res://scenes/EnemyLongJumpPoint_Left.tscn" id="7_tbrsf"]
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPoint_Right.tscn" id="9_cbnfm"]
 [ext_resource type="PackedScene" uid="uid://cbjbq00buup3d" path="res://scenes/Rope.tscn" id="11_bmnqf"]
+[ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -67,3 +68,15 @@ position = Vector2(8, 0)
 [node name="Rope" parent="." instance=ExtResource("11_bmnqf")]
 position = Vector2(61, 73)
 destination_point_y = 100
+
+[node name="LadgerGroup1" type="Node2D" parent="."]
+position = Vector2(24, -1)
+
+[node name="Ladder" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+position = Vector2(8, 97)
+
+[node name="Ladder2" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+position = Vector2(8, 89)
+
+[node name="Ladder3" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+position = Vector2(8, 81)

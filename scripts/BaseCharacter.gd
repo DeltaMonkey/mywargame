@@ -7,8 +7,10 @@ var JumpVelocity: int = -150
 var Health: int = 10
 var AnimatedSprite2D_Node: AnimatedSprite2D
 var DirectionContainer_Node: Node2D
+var CollectedGunContainer: Node2D
 var EquippedGun: BaseGun;
 var CollectedDefaultGun: PackedScene;
+var BlockAnimationPlay: bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = DEFAULT_GRAVITY
@@ -18,12 +20,14 @@ func InitilizeCharacter(
 	jumpVelocity: int,
 	animatedAprite2D: AnimatedSprite2D, 
 	directionContainer_Node: Node2D,
+	collectedGunContainer: Node2D,
 	collectedDefaultGun: PackedScene):
 		
 	Speed = speed
 	JumpVelocity = jumpVelocity
 	AnimatedSprite2D_Node = animatedAprite2D
 	DirectionContainer_Node = directionContainer_Node
+	CollectedGunContainer = collectedGunContainer
 	CollectedDefaultGun = collectedDefaultGun
 
 func TakeDamage(damage: int):
@@ -31,7 +35,7 @@ func TakeDamage(damage: int):
 	Health = Health - damage
 	
 	if AnimatedSprite2D_Node:
-		AnimatedSprite2D_Node.play("hurt")
+		PlayAnimation("hurt")
 		if !AnimatedSprite2D_Node.is_connected("animation_looped", HurtAnimationFinished):
 			AnimatedSprite2D_Node.connect("animation_looped", HurtAnimationFinished)
 		
@@ -41,7 +45,7 @@ func TakeDamage(damage: int):
 func HurtAnimationFinished():
 	AnimatedSprite2D_Node.disconnect("animation_looped", HurtAnimationFinished)
 	if AnimatedSprite2D_Node.animation == "hurt":
-		AnimatedSprite2D_Node.play("idle")
+		PlayAnimation("idle")
 
 func ApplyGravity(delta: float):
 	# Add the gravity.
@@ -59,24 +63,24 @@ func MoveTowardsDirection(direction: float):
 		
 	var animationName: StringName = AnimatedSprite2D_Node.animation;
 	if (velocity.x != 0 and 
-			animationName != 'walk' and 
-			animationName != 'hurt'):
-		AnimatedSprite2D_Node.play("walk")
+			animationName != "walk" and 
+			animationName != "hurt"):
+		PlayAnimation("walk")
 	elif (velocity.x == 0 and 
-			animationName != 'idle' and 
-			animationName != 'hurt'):
-		AnimatedSprite2D_Node.play('idle')
+			animationName != "idle" and 
+			animationName != "hurt"):
+		PlayAnimation("idle")
 	
 	animationName = AnimatedSprite2D_Node.animation;
-	if !is_on_floor() and animationName != 'jump' and animationName != 'hurt':
-		AnimatedSprite2D_Node.play('jump')
+	if !is_on_floor() and animationName != "jump" and animationName != "hurt":
+		PlayAnimation("jump")
 
 func EquipGun(gunToCollect: PackedScene):
 	if EquippedGun != null:
 		EquippedGun.queue_free()
 		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
-	DirectionContainer_Node.add_child(EquippedGun)
+	CollectedGunContainer.add_child(EquippedGun)
 
 func Shoot():
 	if(EquippedGun):
@@ -87,3 +91,7 @@ func Shoot():
 
 func Jump():
 	velocity.y = JumpVelocity
+	
+func PlayAnimation(aninmationName: String, exceptBlocking: String = "") -> void:
+	if(!BlockAnimationPlay || (BlockAnimationPlay and aninmationName == exceptBlocking)):
+		AnimatedSprite2D_Node.play(aninmationName)

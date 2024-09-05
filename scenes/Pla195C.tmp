@@ -1,16 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://d36v0cr3tix7x"]
+[gd_scene load_steps=10 format=3 uid="uid://d36v0cr3tix7x"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_4c34j"]
-[ext_resource type="Texture2D" uid="uid://fsngp8tcup1k" path="res://assets/sprites/blue_player/player_blue_ladder.png" id="2_fh64c"]
 [ext_resource type="Texture2D" uid="uid://dw21ilk7s278o" path="res://assets/sprites/blue_player/player_blue_spritesheet.png" id="2_gmstn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ld8o"]
-atlas = ExtResource("2_fh64c")
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mmsf"]
-atlas = ExtResource("2_fh64c")
-region = Rect2(8, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63nal"]
 atlas = ExtResource("2_gmstn")
@@ -34,17 +25,6 @@ region = Rect2(24, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gfjmf"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ld8o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mmsf")
-}],
-"loop": true,
-"name": &"climb",
-"speed": 4.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_63nal")
@@ -95,8 +75,6 @@ sprite_frames = SubResource("SpriteFrames_gfjmf")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0.5, 0)
-
-[node name="CollectedGunConatiner" type="Node2D" parent="DirectionContainer"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

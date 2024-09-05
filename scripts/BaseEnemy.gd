@@ -5,6 +5,7 @@ const JUMP_VELOCITY = 4
 const ROPE_SLIDE_SPEED = 28.0
 
 @onready var direction_container: Node2D = $DirectionContainer as Node2D
+@onready var collected_gun_container: Node2D = $DirectionContainer/CollectedGunContainer
 @onready var animated_sprite_2d: AnimatedSprite2D = $DirectionContainer/AnimatedSprite2D as AnimatedSprite2D
 
 @onready var timer_to_move: Timer = $TimerToMove as Timer
@@ -57,6 +58,7 @@ func _ready():
 		JUMP_VELOCITY, 
 		animated_sprite_2d, 
 		direction_container,
+		collected_gun_container,
 		collected_gun_default)
 		
 	timer_to_wait.wait_time = SecondToWait
@@ -94,14 +96,14 @@ func _physics_process(delta):
 	if(raycast_enemy_dedector.is_colliding()):
 		var collision = raycast_enemy_dedector.get_collider() as Node
 			
-		var is_colliding_with_wall = collision.is_in_group('wall')
-		var is_colliding_with_player = collision.is_in_group('player')
+		var is_colliding_with_wall = collision.is_in_group("wall")
+		var is_colliding_with_player = collision.is_in_group("player")
 			
 		if(!is_colliding_with_wall && is_colliding_with_player):
 			ActivateAlertMode();
 			velocity.x = 0;
-			if(AnimatedSprite2D_Node.animation != 'hurt'):
-				animated_sprite_2d.play('idle')
+			if(AnimatedSprite2D_Node.animation != "hurt"):
+				PlayAnimation("idle")
 			
 			
 		if(timer_cooldown_time.time_left == 0 && !is_colliding_with_wall && is_colliding_with_player):
