@@ -35,6 +35,10 @@ func _physics_process(delta: float):
 		CollectedGunContainer.visible = false
 	elif !is_on_floor() and LaddersColliding.size() > 0 and ClimbedToLadder:
 		AnimatedSprite2D_Node.pause()
+	elif is_on_floor():
+		BlockAnimationPlay = false
+		ClimbedToLadder = false
+		CollectedGunContainer.visible = true
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_up") and is_on_floor() and LaddersColliding.size() <= 0:
@@ -68,10 +72,6 @@ func LaddersCollidingAppend():
 func LaddersCollidingPopFirst():
 	LaddersColliding.pop_front()
 	if(LaddersColliding.size() <= 0):
-		BlockAnimationPlay = false
-		ClimbedToLadder = false
-		CollectedGunContainer.visible = true
-	if is_on_floor():
 		BlockAnimationPlay = false
 		ClimbedToLadder = false
 		CollectedGunContainer.visible = true
