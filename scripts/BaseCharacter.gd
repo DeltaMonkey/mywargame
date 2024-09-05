@@ -2,7 +2,7 @@ class_name BaseCharacter extends CharacterBody2D
 
 var DEFAULT_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var Speed: int = 100
+var Speed: float = 100.0
 var JumpVelocity: int = -150
 var Health: int = 10
 var AnimatedSprite2D_Node: AnimatedSprite2D
@@ -16,7 +16,7 @@ var BlockAnimationPlay: bool = false
 var gravity = DEFAULT_GRAVITY
 
 func InitilizeCharacter(
-	speed: int,
+	speed: float,
 	jumpVelocity: int,
 	animatedAprite2D: AnimatedSprite2D, 
 	directionContainer_Node: Node2D,
@@ -84,7 +84,8 @@ func EquipGun(gunToCollect: PackedScene):
 
 func Shoot():
 	if(EquippedGun):
-		var remainingBullet = EquippedGun.Shoot(DirectionContainer_Node.scale.x);
+		#DirectionContainer_Node.scale.x must be int allways
+		var remainingBullet = EquippedGun.Shoot(int(DirectionContainer_Node.scale.x));
 		
 		if(remainingBullet == 0 and CollectedDefaultGun != null):
 			EquipGun(CollectedDefaultGun)
