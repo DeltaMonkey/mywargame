@@ -51,12 +51,6 @@ position = Vector2(76, 99)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
 position = Vector2(167, 100)
-SecondToMove = 25.0
-SecondToWait = 2.0
-SecondToMoveWhenAlerted = 2.0
-SecondToWaitWhenAlerted = 1.0
-StopWalking = false
-Direction = 1
 
 [node name="EnemyJumpPoint_Left" parent="." instance=ExtResource("6_wafki")]
 position = Vector2(96, 104)
