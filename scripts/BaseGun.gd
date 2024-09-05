@@ -35,9 +35,9 @@ func Shoot(direction: int) -> int:
 		bullet.set_scale(Vector2(direction, 1))
 		bullet.Direction = direction
 		
-		if(get_parent().get_parent().is_in_group("enemy")):
+		if(get_parent().get_parent().get_parent().is_in_group("enemy")):
 			bullet.IsGunOnEnemyHands = true
-		elif(get_parent().get_parent().is_in_group("player")):
+		elif(get_parent().get_parent().get_parent().is_in_group("player")):
 			bullet.IsGunOnEnemyHands = false
 		
 		bullet.global_position = Muzzle.global_position
