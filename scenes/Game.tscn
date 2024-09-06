@@ -45,10 +45,10 @@ script = ExtResource("3_2j87v")
 TileMapLayer_Ref = NodePath("../../TileMap")
 
 [node name="Pistol_Collectable" parent="." instance=ExtResource("3_qu145")]
-position = Vector2(111, 75)
+position = Vector2(23, 99)
 
 [node name="AssaultRifle_Collectable" parent="." instance=ExtResource("3_b5172")]
-position = Vector2(76, 99)
+position = Vector2(82, 73)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
 position = Vector2(167, 100)

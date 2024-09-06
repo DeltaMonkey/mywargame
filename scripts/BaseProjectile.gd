@@ -38,6 +38,9 @@ func ProjectileHit(body) -> void:
 	if(body.is_in_group("player") || body.is_in_group("enemy")):
 		var character = body as BaseCharacter;
 		character.TakeDamage(Damage)
+		if character.DirectionContainer_Node.scale.x == scale.x:
+			character.PreviousDirection = character.Direction
+			character.Direction = character.Direction * -1;
 		queue_free()
 	else:
 		queue_free()
