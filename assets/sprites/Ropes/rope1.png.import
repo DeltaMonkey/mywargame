@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8bp7asw0ajes"
-path="res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"
+uid="uid://dien0ut7ndoy2"
+path="res://.godot/imported/rope1.png-a12f8db6d3406b27b881a163fcdab049.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Environment/ladder.png"
-dest_files=["res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"]
+source_file="res://assets/sprites/Ropes/rope1.png"
+dest_files=["res://.godot/imported/rope1.png-a12f8db6d3406b27b881a163fcdab049.ctex"]
 
 [params]
 

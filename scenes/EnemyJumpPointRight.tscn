@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://tyhwyy6mxfhk"]
+
+[ext_resource type="Script" path="res://scripts/EnemyJumpPoint.gd" id="1_blyvn"]
+
+[sub_resource type="Curve2D" id="Curve2D_kxgif"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -4, -4, 0, 0, 0, 0, -2, -12, 0, 0, 0, 0, 2, -16)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8thaf"]
+size = Vector2(2, 1)
+
+[node name="EnemyJumpPointRight" type="Node2D"]
+script = ExtResource("1_blyvn")
+
+[node name="JumpPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_kxgif")
+
+[node name="EnemyDedector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDedector"]
+position = Vector2(-4, -0.5)
+shape = SubResource("RectangleShape2D_8thaf")
+
+[connection signal="body_entered" from="EnemyDedector" to="." method="_on_enemy_dedector_body_entered"]

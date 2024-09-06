@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b075hic5laxks"]
 
 [ext_resource type="Script" path="res://scripts/BaseEnemy.gd" id="1_4k8t0"]
-[ext_resource type="Texture2D" uid="uid://dh6khxjhkdmpd" path="res://assets/sprites/red_player/player_red_spritesheet.png" id="2_58yv5"]
+[ext_resource type="Texture2D" uid="uid://dh6khxjhkdmpd" path="res://assets/sprites/RedPlayer/playerRedSpriteSheet.png" id="2_58yv5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkqp2"]
 atlas = ExtResource("2_58yv5")
@@ -73,11 +73,11 @@ script = ExtResource("1_4k8t0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DirectionContainer"]
 sprite_frames = SubResource("SpriteFrames_d84h7")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
 offset = Vector2(0.5, 0)
 
-[node name="RaycastEnemyDedector" type="RayCast2D" parent="DirectionContainer"]
+[node name="RaycastEnemyDetector" type="RayCast2D" parent="DirectionContainer"]
 target_position = Vector2(60, 0)
 collision_mask = 17
 

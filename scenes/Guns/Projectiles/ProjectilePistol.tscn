@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgt5s0qbeieba"]
+
+[ext_resource type="Script" path="res://scripts/ProjectilePistol.gd" id="1_t35jt"]
+[ext_resource type="Texture2D" uid="uid://dd0syute7bsuk" path="res://assets/sprites/Guns/Pistol/pistolGunProjectile.png" id="2_t5ccj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i64r"]
+size = Vector2(1, 1)
+
+[node name="ProjectilePistol" type="Area2D"]
+collision_layer = 4
+collision_mask = 24
+script = ExtResource("1_t35jt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_6i64r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("2_t5ccj")
+
+[node name="DestroyBulletTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true

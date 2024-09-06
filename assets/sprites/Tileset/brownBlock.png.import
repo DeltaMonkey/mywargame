@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8bp7asw0ajes"
-path="res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"
+uid="uid://bcx5sx1gbkjga"
+path="res://.godot/imported/brownBlock.png-a6a62eda6d865f6a884e392ac5142c5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Environment/ladder.png"
-dest_files=["res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"]
+source_file="res://assets/sprites/Tileset/brownBlock.png"
+dest_files=["res://.godot/imported/brownBlock.png-a6a62eda6d865f6a884e392ac5142c5a.ctex"]
 
 [params]
 

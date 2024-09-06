@@ -1,98 +1,98 @@
 class_name BaseCharacter extends CharacterBody2D
 
-var DEFAULT_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+#CONSTS
+var DEFAULT_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity") #COULDN'T DEFINED BECAUSE OF ProjectSettings
 
+#VARS
+var AnimatedSprite2DNodeBaseCharacter: AnimatedSprite2D
+var DirectionContainerNodeBaseCharacter: Node2D
+var CollectedGunContainerNodeBaseCharacter: Node2D
+var EquippedGun: BaseGun;
+var CollectedDefaultGun: PackedScene;
 var Speed: float = 100.0
 var JumpVelocity: int = -150
 var Health: int = 10
-var AnimatedSprite2D_Node: AnimatedSprite2D
-var DirectionContainer_Node: Node2D
-var CollectedGunContainer: Node2D
-var EquippedGun: BaseGun;
-var CollectedDefaultGun: PackedScene;
 var BlockAnimationPlay: bool = false
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = DEFAULT_GRAVITY
+var gravity = DEFAULT_GRAVITY # Get the gravity from the project settings to be synced with RigidBody nodes.
 
 func InitilizeCharacter(
 	speed: float,
 	jumpVelocity: int,
-	animatedAprite2D: AnimatedSprite2D, 
-	directionContainer_Node: Node2D,
-	collectedGunContainer: Node2D,
-	collectedDefaultGun: PackedScene):
+	animatedSprite2DNode: AnimatedSprite2D, 
+	directionContainerNode: Node2D,
+	collectedGunContainerNode: Node2D,
+	collectedDefaultGun: PackedScene) -> void:
 		
 	Speed = speed
 	JumpVelocity = jumpVelocity
-	AnimatedSprite2D_Node = animatedAprite2D
-	DirectionContainer_Node = directionContainer_Node
-	CollectedGunContainer = collectedGunContainer
+	AnimatedSprite2DNodeBaseCharacter = animatedSprite2DNode
+	DirectionContainerNodeBaseCharacter = directionContainerNode
+	CollectedGunContainerNodeBaseCharacter = collectedGunContainerNode
 	CollectedDefaultGun = collectedDefaultGun
 
-func TakeDamage(damage: int):
+func TakeDamage(damage: int) -> void:
 	print(get_groups()[0] + " took " + str(damage) + " damage.")
 	Health = Health - damage
 	
-	if AnimatedSprite2D_Node:
-		PlayAnimation("hurt")
-		if !AnimatedSprite2D_Node.is_connected("animation_looped", HurtAnimationFinished):
-			AnimatedSprite2D_Node.connect("animation_looped", HurtAnimationFinished)
+	if AnimatedSprite2DNodeBaseCharacter:
+		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT)
+		if !AnimatedSprite2DNodeBaseCharacter.is_connected("animation_looped", HurtAnimationFinished):
+			AnimatedSprite2DNodeBaseCharacter.connect("animation_looped", HurtAnimationFinished)
 		
 	if Health <= 0:
 		queue_free();
 
-func HurtAnimationFinished():
-	AnimatedSprite2D_Node.disconnect("animation_looped", HurtAnimationFinished)
-	if AnimatedSprite2D_Node.animation == "hurt":
-		PlayAnimation("idle")
+func HurtAnimationFinished() -> void:
+	AnimatedSprite2DNodeBaseCharacter.disconnect("animation_looped", HurtAnimationFinished)
+	if AnimatedSprite2DNodeBaseCharacter.animation == Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT:
+		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_IDLE)
 
-func ApplyGravity(delta: float):
+func ApplyGravity(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-func MoveTowardsDirection(direction: float):
+func MoveTowardsDirection(direction: float) -> void:
 	if direction:
-		if direction > 0 and DirectionContainer_Node.scale != Vector2(1, 1): DirectionContainer_Node.set_scale(Vector2(1, 1))
-		elif direction < 0 and DirectionContainer_Node.scale != Vector2(-1, 1): DirectionContainer_Node.set_scale(Vector2(-1, 1))
+		if direction > 0 and DirectionContainerNodeBaseCharacter.scale != Vector2(1, 1): DirectionContainerNodeBaseCharacter.set_scale(Vector2(1, 1))
+		elif direction < 0 and DirectionContainerNodeBaseCharacter.scale != Vector2(-1, 1): DirectionContainerNodeBaseCharacter.set_scale(Vector2(-1, 1))
 		
 		velocity.x = direction * Speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, Speed)
 		
-	var animationName: StringName = AnimatedSprite2D_Node.animation;
+	var animationName: StringName = AnimatedSprite2DNodeBaseCharacter.animation;
 	if (velocity.x != 0 and 
-			animationName != "walk" and 
-			animationName != "hurt"):
-		PlayAnimation("walk")
+			animationName != Constants.CHARACTER_MOVEMENT_ANIMATIONS_WALK and 
+			animationName != Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT):
+		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_WALK)
 	elif (velocity.x == 0 and 
-			animationName != "idle" and 
-			animationName != "hurt"):
-		PlayAnimation("idle")
+			animationName != Constants.CHARACTER_MOVEMENT_ANIMATIONS_IDLE and 
+			animationName != Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT):
+		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_IDLE)
 	
-	animationName = AnimatedSprite2D_Node.animation;
-	if !is_on_floor() and animationName != "jump" and animationName != "hurt":
-		PlayAnimation("jump")
+	animationName = AnimatedSprite2DNodeBaseCharacter.animation;
+	if !is_on_floor() and animationName !=  Constants.CHARACTER_MOVEMENT_ANIMATIONS_JUMP and animationName != Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT:
+		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_JUMP)
 
-func EquipGun(gunToCollect: PackedScene):
+func EquipGun(gunToCollect: PackedScene) -> void:
 	if EquippedGun != null:
 		EquippedGun.queue_free()
 		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
-	CollectedGunContainer.add_child(EquippedGun)
+	CollectedGunContainerNodeBaseCharacter.add_child(EquippedGun)
 
-func Shoot():
+func Shoot() -> void:
 	if(EquippedGun):
 		#DirectionContainer_Node.scale.x must be int allways
-		var remainingBullet = EquippedGun.Shoot(int(DirectionContainer_Node.scale.x));
+		var remainingBullet = EquippedGun.Shoot(int(DirectionContainerNodeBaseCharacter.scale.x));
 		
 		if(remainingBullet == 0 and CollectedDefaultGun != null):
 			EquipGun(CollectedDefaultGun)
 
-func Jump():
+func Jump() -> void:
 	velocity.y = JumpVelocity
-	
+
 func PlayAnimation(aninmationName: String, exceptBlocking: String = "") -> void:
 	if(!BlockAnimationPlay || (BlockAnimationPlay and aninmationName == exceptBlocking)):
-		AnimatedSprite2D_Node.play(aninmationName)
+		AnimatedSprite2DNodeBaseCharacter.play(aninmationName)

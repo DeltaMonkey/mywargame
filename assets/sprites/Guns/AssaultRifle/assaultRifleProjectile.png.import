@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8bp7asw0ajes"
-path="res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"
+uid="uid://ca7pfn6hhq15k"
+path="res://.godot/imported/assaultRifleProjectile.png-ebf53d227013ac3537294fcdc1a3e74e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Environment/ladder.png"
-dest_files=["res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"]
+source_file="res://assets/sprites/Guns/AssaultRifle/assaultRifleProjectile.png"
+dest_files=["res://.godot/imported/assaultRifleProjectile.png-ebf53d227013ac3537294fcdc1a3e74e.ctex"]
 
 [params]
 

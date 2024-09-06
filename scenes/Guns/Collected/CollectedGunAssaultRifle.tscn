@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://2dsdnk3085wv"]
+
+[ext_resource type="Script" path="res://scripts/CollectedGunAssaultRifle.gd" id="1_gy6eb"]
+[ext_resource type="Texture2D" uid="uid://b74hmx4jbnge5" path="res://assets/sprites/Guns/AssaultRifle/assaultRifleEq.png" id="1_jwrb3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yu38x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jwrb3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CollectedGunAssaultRifle" type="Node2D"]
+script = ExtResource("1_gy6eb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.5, 0)
+sprite_frames = SubResource("SpriteFrames_yu38x")
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(4, -1)
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

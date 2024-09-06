@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjobq06yxc628"]
+
+[ext_resource type="Texture2D" uid="uid://dmirhqpsqytpg" path="res://assets/sprites/Guns/Pistol/pistolGunEq.png" id="1_8jxex"]
+[ext_resource type="Script" path="res://scripts/CollectedGunPistol.gd" id="1_cwlno"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yu38x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8jxex")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CollectedGunPistol" type="Node2D"]
+script = ExtResource("1_cwlno")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.5, 0)
+sprite_frames = SubResource("SpriteFrames_yu38x")
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(2, -1)
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

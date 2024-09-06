@@ -1,33 +1,33 @@
 class_name BaseGun extends Node2D
 
+#VARS
 var ProjectileBase: PackedScene
-var Muzzle: Node2D
-var ShootCooldownTimer: Timer
-# -1 is infinite bullet
-var BulletCount: int 
+var MuzzleNodeBaseGun: Node2D
+var ShootCooldownTimerNodeBaseGun: Timer
+var BulletCount: int # -1 is infinite bullet
 
 func InitiateGun(
 	projectileBase: PackedScene, 
-	muzzle: Node2D, 
-	shootCooldownTimer: Timer, 
+	muzzleNode: Node2D, 
+	shootCooldownTimerNode: Timer, 
 	bulletCount: int = -1):
 		
 	ProjectileBase = projectileBase
-	Muzzle = muzzle
+	MuzzleNodeBaseGun = muzzleNode
 	BulletCount = bulletCount
-	ShootCooldownTimer = shootCooldownTimer
+	ShootCooldownTimerNodeBaseGun = shootCooldownTimerNode
 	
 
 ## returns remaining bullet count
 ## -1 is infinite bullet
 ## -2 waiting to cooldown
 func Shoot(direction: int) -> int:
-	if ShootCooldownTimer.time_left > 0: return -2
+	if ShootCooldownTimerNodeBaseGun.time_left > 0: return -2
 	
 	if(BulletCount == -1 || BulletCount > 0):
 		if BulletCount != -1: BulletCount = BulletCount - 1
 		
-		ShootCooldownTimer.start()
+		ShootCooldownTimerNodeBaseGun.start()
 		
 		var bullet_instance = ProjectileBase.instantiate();
 		var bullet: BaseProjectile = bullet_instance as BaseProjectile
@@ -35,15 +35,13 @@ func Shoot(direction: int) -> int:
 		bullet.set_scale(Vector2(direction, 1))
 		bullet.Direction = direction
 		
-		if(get_parent().get_parent().get_parent().is_in_group("enemy")):
+		if(get_parent().get_parent().get_parent().is_in_group(Constants.GROUPS_ENEMY)):
 			bullet.IsGunOnEnemyHands = true
-		elif(get_parent().get_parent().get_parent().is_in_group("player")):
+		elif(get_parent().get_parent().get_parent().is_in_group(Constants.GROUPS_PLAYER)):
 			bullet.IsGunOnEnemyHands = false
 		
-		bullet.global_position = Muzzle.global_position
+		bullet.global_position = MuzzleNodeBaseGun.global_position
 		
-
-			
 		get_tree().get_root().add_child(bullet)
-	
+		
 	return BulletCount

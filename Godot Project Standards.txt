@@ -1,0 +1,25 @@
+Godot Project Standards
+
+#1 Orders of Definitions
+
+CONSTS
+@ONREADIES
+@EXPORTS
+VARS
+VARS -> Those with default values ​​will be added below those without
+SIGNALS
+
+#2 Definition Case Standards
+
+CONSTLAR -> SNAKE_CASE FULL UPPERCASE
+@ONREADYLER -> Snake_Case Start with Uppercase Continue with Lowercase
+@EXPORTLAR -> PascalCase
+VAR/VARIABLES -> PascalCase
+SIGNALS -> PascalCase
+PARAMETERS -> camelCase
+
+#3 MethodDefinitions will PascalCase() -> and contains type definition
+
+#4 Node references will contain Node suffix, if it goes to base class, base class name will be added to the ending
+
+#5 All gdscript, node and scene  etc. names are PascalCase

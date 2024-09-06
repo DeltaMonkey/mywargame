@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8bp7asw0ajes"
-path="res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"
+uid="uid://dh6khxjhkdmpd"
+path="res://.godot/imported/playerRedSpriteSheet.png-0f396e0fae6c974b8f8f5c9adbe5ff99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Environment/ladder.png"
-dest_files=["res://.godot/imported/ladder.png-7fd153d52eb75bcfe872eeea999d7d8c.ctex"]
+source_file="res://assets/sprites/RedPlayer/playerRedSpriteSheet.png"
+dest_files=["res://.godot/imported/playerRedSpriteSheet.png-0f396e0fae6c974b8f8f5c9adbe5ff99.ctex"]
 
 [params]
 
