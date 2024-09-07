@@ -40,10 +40,10 @@ func DestroyBulletCuzTimerOut() -> void:
 	queue_free()
 
 func ProjectileHit(body) -> void:
-	if(body.is_in_group(Constants.GROUPS_PLAYER) || body.is_in_group(Constants.GROUPS_ENEMY)):
+	if(body.is_in_group(Constants.GROUPS_PLAYER) ||body.is_in_group(Constants.GROUPS_ENEMY)):
 		var character: BaseCharacter = body as BaseCharacter;
 		character.TakeDamage(Damage)
-		if character.DirectionContainerNodeBaseCharacter.scale.x == scale.x:
+		if body.is_in_group(Constants.GROUPS_ENEMY) and character.DirectionContainerNodeBaseCharacter.scale.x == scale.x:
 			character.PreviousDirection = character.Direction
 			character.Direction = character.Direction * -1;
 		queue_free()
