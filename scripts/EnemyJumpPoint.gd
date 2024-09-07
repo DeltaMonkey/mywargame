@@ -13,7 +13,8 @@ func _on_enemy_dedector_body_entered(body) -> void:
 	var enemyObj = body as BaseEnemy
 	
 	if(enemyObj.Direction == Direction):
-		if(enemyObj.is_in_group('enemy') && dedectedEnemyObjIdsArray.find(enemyObj.get_instance_id()) == -1):
+		if(enemyObj.is_in_group('enemy') && dedectedEnemyObjIdsArray.find(enemyObj.get_instance_id()) == -1 && enemyObj.JumpRequest()):
+			
 			dedectedEnemyObjIdsArray.push_back(enemyObj.get_instance_id())
 			var pathFollow2d = PathFollow2D.new()
 			pathFollow2d.rotates = false

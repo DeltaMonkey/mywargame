@@ -40,6 +40,7 @@ var IsEnemyShouldDelayToShoot: bool = true
 var IsStopEnemyMovementProcessForce: bool = false
 var EnemyRopeSlidingDestinationPointY: int = 0
 var CheckEnemyRopeSlidingDestinationPointY: bool = false
+var JumpSheet: Array[bool] = [] #JumpSheet has three size but one of them must be false
 
 func _ready() -> void:
 	InitilizeCharacter(
@@ -226,8 +227,32 @@ func SetEnemyPreviousDirection(direction: int) -> void:
 func GetEnemyPreviousDirection() -> int:
 	return PreviousDirection
 
-func _on_TimerToAlert_timeout():
+func _on_TimerToAlert_timeout() -> void:
 	DeactivateAlertMode();
 
-func _on_TimerShockToShoot_timeout():
+func _on_TimerShockToShoot_timeout() -> void:
 	Shoot()
+
+func JumpRequest() -> bool:
+	var jumpWillHappen = JumpWillHappen()
+	
+	if(JumpSheet.size() < 3):
+		JumpSheet.append(jumpWillHappen)
+	else:
+		JumpSheet = [jumpWillHappen]
+		
+	return jumpWillHappen
+
+func JumpWillHappen() -> bool:
+	if JumpSheet.size() == 2 and JumpSheet[0] and JumpSheet[1]:
+		return false
+	
+	print(JumpSheet.bsearch(false))
+	if JumpSheet.size() < 3 and JumpSheet.bsearch(false) != JumpSheet.size():
+		return true
+	
+	var jump = true
+	if randi() % 2:
+		jump = false 
+	
+	return jump
