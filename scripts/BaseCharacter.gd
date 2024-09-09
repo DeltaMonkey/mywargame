@@ -3,6 +3,10 @@ class_name BaseCharacter extends CharacterBody2D
 #CONSTS
 var DEFAULT_GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity") #COULDN'T DEFINED BECAUSE OF ProjectSettings
 
+#@EXPORTS
+@export var MaxHealth: int = 10
+@export var CurrentHealth: int = MaxHealth
+
 #VARS
 var AnimatedSprite2DNodeBaseCharacter: AnimatedSprite2D
 var DirectionContainerNodeBaseCharacter: Node2D
@@ -11,9 +15,10 @@ var EquippedGun: BaseGun;
 var CollectedDefaultGun: PackedScene;
 var Speed: float = 100.0
 var JumpVelocity: int = -150
-var Health: int = 10
 var BlockAnimationPlay: bool = false
 var gravity = DEFAULT_GRAVITY # Get the gravity from the project settings to be synced with RigidBody nodes.
+
+signal HealthChanged
 
 func InitilizeCharacter(
 	speed: float,
@@ -32,14 +37,14 @@ func InitilizeCharacter(
 
 func TakeDamage(damage: int) -> void:
 	print(get_groups()[0] + " took " + str(damage) + " damage.")
-	Health = Health - damage
+	DecreaseHealth(damage)
 	
 	if AnimatedSprite2DNodeBaseCharacter:
 		PlayAnimation(Constants.CHARACTER_MOVEMENT_ANIMATIONS_HURT)
 		if !AnimatedSprite2DNodeBaseCharacter.is_connected("animation_looped", HurtAnimationFinished):
 			AnimatedSprite2DNodeBaseCharacter.connect("animation_looped", HurtAnimationFinished)
 		
-	if Health <= 0:
+	if CurrentHealth <= 0:
 		queue_free();
 
 func HurtAnimationFinished() -> void:
@@ -96,3 +101,13 @@ func Jump() -> void:
 func PlayAnimation(aninmationName: String, exceptBlocking: String = "") -> void:
 	if(!BlockAnimationPlay || (BlockAnimationPlay and aninmationName == exceptBlocking)):
 		AnimatedSprite2DNodeBaseCharacter.play(aninmationName)
+
+func IncreaseHealth(health: int):
+	CurrentHealth = CurrentHealth + health
+	if CurrentHealth > MaxHealth:
+		CurrentHealth = MaxHealth
+		HealthChanged.emit()
+	
+func DecreaseHealth(damage: int):
+	CurrentHealth = CurrentHealth - damage
+	HealthChanged.emit()

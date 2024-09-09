@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=18 format=4 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/Tileset/brownBlock.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPointRight.tscn" id="9_cbnfm"]
 [ext_resource type="PackedScene" uid="uid://cbjbq00buup3d" path="res://scenes/Rope.tscn" id="11_bmnqf"]
 [ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="13_cy02n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -24,6 +25,12 @@ tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 13
 sources/0 = SubResource("TileSetAtlasSource_tiy31")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3bc8"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30b1b"]
+bg_color = Color(0.40032, 0.72, 0.2016, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -80,3 +87,21 @@ position = Vector2(0, 8)
 
 [node name="Ladder3" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
 position = Vector2(0, 16)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("Player")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = 8.0
+grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_a3bc8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_30b1b")
+value = 50.0
+show_percentage = false
+script = ExtResource("13_cy02n")
+Player = NodePath("../../Player")
