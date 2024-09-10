@@ -55,11 +55,14 @@ func _ready() -> void:
 	TimerToMove.wait_time = SecondToMove
 	TimerToMove.connect("timeout", TimeToWait)
 	TimerToWait.connect("timeout", TimeToWalk)
+	TimerToAlert.connect("timeout", _on_TimerToAlert_timeout)
+	TimerShockToShoot.connect("timeout", _on_TimerShockToShoot_timeout)
 	
 	if IsStopEnemyMovementProcessForce:
 		DisableCollisionAndRaygcasts()
 	
 	EquipGun(CollectedGunDefault)
+	
 
 func _physics_process(delta) -> void:
 		
