@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=19 format=4 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/Tileset/brownBlock.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cbjbq00buup3d" path="res://scenes/Rope.tscn" id="11_bmnqf"]
 [ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="13_cy02n"]
+[ext_resource type="PackedScene" uid="uid://dywyrsqjo6j70" path="res://scenes/HealthBox.tscn" id="14_sfa21"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
 texture = ExtResource("1_eb77v")
@@ -105,3 +106,12 @@ value = 50.0
 show_percentage = false
 script = ExtResource("13_cy02n")
 Player = NodePath("../../Player")
+
+[node name="HealthBox" parent="." instance=ExtResource("14_sfa21")]
+position = Vector2(56, 98)
+
+[node name="HealthBox2" parent="." instance=ExtResource("14_sfa21")]
+position = Vector2(129, 50)
+
+[node name="HealthBox3" parent="." instance=ExtResource("14_sfa21")]
+position = Vector2(182, 98)

@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dywyrsqjo6j70"]
+
+[ext_resource type="Texture2D" uid="uid://271v18i2xrf3" path="res://assets/sprites/Environment/HealthBox.png" id="1_ka0fm"]
+[ext_resource type="Script" path="res://scripts/HealthBox.gd" id="1_kpaeh"]
+
+[sub_resource type="Animation" id="Animation_vflic"]
+resource_name = "HealthBoxSwing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 2), Vector2(4, -1), Vector2(4, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_ga7i1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pl3q"]
+_data = {
+"HealthBoxSwing": SubResource("Animation_vflic"),
+"RESET": SubResource("Animation_ga7i1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5st34"]
+size = Vector2(5, 8)
+
+[node name="HealthBox" type="Area2D"]
+z_index = -11
+script = ExtResource("1_kpaeh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 2)
+texture = ExtResource("1_ka0fm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3pl3q")
+}
+autoplay = "HealthBoxSwing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 2)
+shape = SubResource("RectangleShape2D_5st34")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
