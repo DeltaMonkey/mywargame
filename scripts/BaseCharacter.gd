@@ -14,7 +14,7 @@ var CollectedGunContainerNodeBaseCharacter: Node2D
 var EquippedGun: BaseGun;
 var CollectedDefaultGun: PackedScene;
 var Speed: float = 100.0
-var JumpVelocity: int = -150
+var JumpVelocity: float = -150.0
 var BlockAnimationPlay: bool = false
 var gravity = DEFAULT_GRAVITY # Get the gravity from the project settings to be synced with RigidBody nodes.
 
@@ -22,7 +22,7 @@ signal HealthChanged
 
 func InitilizeCharacter(
 	speed: float,
-	jumpVelocity: int,
+	jumpVelocity: float,
 	animatedSprite2DNode: AnimatedSprite2D, 
 	directionContainerNode: Node2D,
 	collectedGunContainerNode: Node2D,
