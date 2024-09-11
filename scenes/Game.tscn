@@ -55,6 +55,9 @@ TileMapLayerNode = NodePath("../../TileMap")
 [node name="PistolCollectable" parent="." instance=ExtResource("3_qu145")]
 position = Vector2(23, 99)
 
+[node name="PistolCollectable2" parent="." instance=ExtResource("3_qu145")]
+position = Vector2(46, 73)
+
 [node name="AssaultRifleCollectable" parent="." instance=ExtResource("3_b5172")]
 position = Vector2(82, 73)
 
