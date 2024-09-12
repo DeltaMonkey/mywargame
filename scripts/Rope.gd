@@ -8,6 +8,7 @@ const ENEMY: PackedScene = preload("res://scenes/Enemy.tscn")
 #@ONREADIES
 @export var DestinationPointY: int = 0
 @export var RollbackAndDestroyPointY: int = 0
+@export var EnemyDefaultGun: PackedScene = null;
 
 #VARS
 var Enemy: BaseEnemy
@@ -18,13 +19,19 @@ var MoveStatus: CONSTANTS.MOVEMENT_STATUS = CONSTANTS.MOVEMENT_STATUS.DOWN
 signal OnTheRopeReleased;
 
 func _ready() -> void:
+	call_deferred("OnStart")
+	
+func OnStart() -> void:
 	var enemyInstance = ENEMY.instantiate()
 	
 	Enemy = enemyInstance as BaseEnemy;
 	Enemy.position = global_position
 	
-	get_tree().get_root().get_node("Game").add_child.call_deferred(Enemy)
+	if EnemyDefaultGun != null:
+		Enemy.SetDefaultGun(EnemyDefaultGun)
 	
+	get_tree().get_root().get_node("Game").add_child.call_deferred(Enemy)
+		
 	Enemy.StopEnemyMovementProcessForce()
 	Enemy.SlideWithRope(DestinationPointY, OnTheRopeReleased)
 

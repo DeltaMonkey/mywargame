@@ -33,10 +33,11 @@ func InitilizeCharacter(
 	AnimatedSprite2DNodeBaseCharacter = animatedSprite2DNode
 	DirectionContainerNodeBaseCharacter = directionContainerNode
 	CollectedGunContainerNodeBaseCharacter = collectedGunContainerNode
+	var x = is_in_group(Constants.GROUPS_PLAYER)
 	CollectedDefaultGun = collectedDefaultGun
 
 func TakeDamage(damage: int) -> void:
-	print(get_groups()[0] + " took " + str(damage) + " damage.")
+	#print(get_groups()[0] + " took " + str(damage) + " damage.")
 	DecreaseHealth(damage)
 	
 	if AnimatedSprite2DNodeBaseCharacter:
@@ -85,6 +86,8 @@ func EquipGun(gunToCollect: PackedScene) -> void:
 		EquippedGun.queue_free()
 		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
+	print(EquippedGun.name)
+	
 	CollectedGunContainerNodeBaseCharacter.add_child(EquippedGun)
 
 func Shoot() -> void:

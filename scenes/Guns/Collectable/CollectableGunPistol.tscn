@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://scripts/CollectableGunPistol.gd" id="1_pcp0l"]
 [ext_resource type="Texture2D" uid="uid://dt35x7anihtye" path="res://assets/sprites/Guns/Pistol/pistolGun.png" id="2_hg24c"]
 
+[sub_resource type="Animation" id="Animation_wnawd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bsucw"]
 resource_name = "Swing"
 loop_mode = 1
@@ -17,21 +32,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_wnawd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_am0t2"]
@@ -49,7 +49,6 @@ collision_mask = 9
 script = ExtResource("1_pcp0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
 rotation = -0.785398
 texture = ExtResource("2_hg24c")
 offset = Vector2(2, 0)

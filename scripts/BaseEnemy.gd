@@ -26,7 +26,7 @@ const ROPE_SLIDE_SPEED = 28.0
 @export var SecondToWaitWhenAlerted: float = 1
 @export var StopWalking = false
 @export var Direction: int = 1
-@export var CollectedGunDefault = preload("res://scenes/Guns/Collected/CollectedGunPistol.tscn")
+@export var CollectedGunDefault: PackedScene = preload("res://scenes/Guns/Collected/CollectedGunPistol.tscn")
 
 #VARS
 var ReparentNode: Node
@@ -61,9 +61,8 @@ func _ready() -> void:
 	if IsStopEnemyMovementProcessForce:
 		DisableCollisionAndRaygcasts()
 	
-	EquipGun(CollectedGunDefault)
+	EquipGun(CollectedDefaultGun)
 	
-
 func _physics_process(delta) -> void:
 		
 	ApplyGravity(delta)
@@ -250,7 +249,6 @@ func JumpWillHappen() -> bool:
 	if JumpSheet.size() == 2 and JumpSheet[0] and JumpSheet[1]:
 		return false
 	
-	print(JumpSheet.bsearch(false))
 	if JumpSheet.size() < 3 and JumpSheet.bsearch(false) != JumpSheet.size():
 		return true
 	
@@ -259,3 +257,7 @@ func JumpWillHappen() -> bool:
 		jump = false 
 	
 	return jump
+	
+func SetDefaultGun(gunPackedScene: PackedScene) -> void:
+	CollectedGunDefault = gunPackedScene
+	CollectedDefaultGun = gunPackedScene

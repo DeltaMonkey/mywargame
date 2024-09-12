@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dhcudf7vpw8nn"]
+[gd_scene load_steps=19 format=4 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/Tileset/brownBlock.png" id="1_eb77v"]
 [ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
@@ -10,10 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://jwghx8g3e5t0" path="res://scenes/EnemyJumpPointLeft.tscn" id="6_wafki"]
 [ext_resource type="PackedScene" uid="uid://btp1rnppgqoou" path="res://scenes/EnemyLongJumpPointLeft.tscn" id="7_tbrsf"]
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPointRight.tscn" id="9_cbnfm"]
-[ext_resource type="PackedScene" uid="uid://cbjbq00buup3d" path="res://scenes/Rope.tscn" id="11_bmnqf"]
 [ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="13_cy02n"]
-[ext_resource type="PackedScene" uid="uid://dywyrsqjo6j70" path="res://scenes/HealthBox.tscn" id="14_sfa21"]
+[ext_resource type="Script" path="res://scripts/WaveManager.gd" id="15_n25oc"]
 [ext_resource type="PackedScene" uid="uid://picsijt3uj86" path="res://scenes/CollectableSpawner.tscn" id="15_xm4pw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
@@ -54,7 +53,7 @@ script = ExtResource("3_2j87v")
 TileMapLayerNode = NodePath("../../TileMap")
 
 [node name="PistolCollectable" parent="." instance=ExtResource("3_qu145")]
-position = Vector2(23, 99)
+position = Vector2(161, 98)
 
 [node name="PistolCollectable2" parent="." instance=ExtResource("3_qu145")]
 position = Vector2(46, 73)
@@ -63,6 +62,8 @@ position = Vector2(46, 73)
 position = Vector2(82, 73)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
+process_mode = 4
+visible = false
 position = Vector2(167, 100)
 
 [node name="EnemyJumpPointLeft" parent="." instance=ExtResource("6_wafki")]
@@ -77,20 +78,15 @@ position = Vector2(0, -24)
 [node name="EnemyLongJumpPointRight" parent="EnemyJumpPointRight/EnemyLongJumpPointLeft" instance=ExtResource("9_cbnfm")]
 position = Vector2(8, 0)
 
-[node name="Rope" parent="." instance=ExtResource("11_bmnqf")]
-position = Vector2(61, 73)
-DestinationPointY = 100
-RollbackAndDestroyPointY = -100
-
-[node name="LadgerGroup1" type="Node2D" parent="."]
+[node name="Ladder1" type="Node2D" parent="."]
 position = Vector2(32, 80)
 
-[node name="Ladder" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+[node name="Ladder" parent="Ladder1" instance=ExtResource("12_wd1d0")]
 
-[node name="Ladder2" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+[node name="Ladder2" parent="Ladder1" instance=ExtResource("12_wd1d0")]
 position = Vector2(0, 8)
 
-[node name="Ladder3" parent="LadgerGroup1" instance=ExtResource("12_wd1d0")]
+[node name="Ladder3" parent="Ladder1" instance=ExtResource("12_wd1d0")]
 position = Vector2(0, 16)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -111,16 +107,28 @@ show_percentage = false
 script = ExtResource("13_cy02n")
 Player = NodePath("../../Player")
 
-[node name="HealthBox" parent="." instance=ExtResource("14_sfa21")]
-position = Vector2(56, 98)
-
-[node name="HealthBox2" parent="." instance=ExtResource("14_sfa21")]
-position = Vector2(129, 50)
-
-[node name="HealthBox3" parent="." instance=ExtResource("14_sfa21")]
-position = Vector2(182, 98)
-
 [node name="CollectableSpawners" type="Node2D" parent="."]
 
 [node name="CollectableSpawner" parent="CollectableSpawners" instance=ExtResource("15_xm4pw")]
 position = Vector2(62, 72)
+
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("15_n25oc")
+
+[node name="SpawnPoint1" type="Node2D" parent="WaveManager"]
+position = Vector2(30, -11)
+
+[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint1"]
+position = Vector2(0, 107)
+
+[node name="SpawnPoint2" type="Node2D" parent="WaveManager"]
+position = Vector2(103, -11)
+
+[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint2"]
+position = Vector2(0, 107)
+
+[node name="SpawnPoint3" type="Node2D" parent="WaveManager"]
+position = Vector2(175, -11)
+
+[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint3"]
+position = Vector2(0, 107)
