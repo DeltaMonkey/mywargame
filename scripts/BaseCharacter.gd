@@ -18,7 +18,8 @@ var JumpVelocity: float = -150.0
 var BlockAnimationPlay: bool = false
 var gravity = DEFAULT_GRAVITY # Get the gravity from the project settings to be synced with RigidBody nodes.
 
-signal HealthChanged
+signal OnHealthChanged
+signal OnKilled(character: BaseCharacter)
 
 func InitilizeCharacter(
 	speed: float,
@@ -46,6 +47,7 @@ func TakeDamage(damage: int) -> void:
 			AnimatedSprite2DNodeBaseCharacter.connect("animation_looped", HurtAnimationFinished)
 		
 	if CurrentHealth <= 0:
+		OnKilled.emit(self)
 		queue_free();
 
 func HurtAnimationFinished() -> void:
@@ -109,8 +111,8 @@ func IncreaseHealth(health: int):
 	CurrentHealth = CurrentHealth + health
 	if CurrentHealth > MaxHealth:
 		CurrentHealth = MaxHealth
-		HealthChanged.emit()
+		OnHealthChanged.emit()
 	
 func DecreaseHealth(damage: int):
 	CurrentHealth = CurrentHealth - damage
-	HealthChanged.emit()
+	OnHealthChanged.emit()

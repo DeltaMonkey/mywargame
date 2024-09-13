@@ -17,6 +17,7 @@ var MoveStatus: CONSTANTS.MOVEMENT_STATUS = CONSTANTS.MOVEMENT_STATUS.DOWN
 
 #SIGNALS
 signal OnTheRopeReleased;
+signal OnEnemyCreated;
 
 func _ready() -> void:
 	call_deferred("OnStart")
@@ -34,6 +35,8 @@ func OnStart() -> void:
 		
 	Enemy.StopEnemyMovementProcessForce()
 	Enemy.SlideWithRope(DestinationPointY, OnTheRopeReleased)
+	
+	OnEnemyCreated.emit(Enemy)
 
 func _process(delta) -> void:
 	if(MoveStatus == CONSTANTS.MOVEMENT_STATUS.DOWN):

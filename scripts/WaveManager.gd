@@ -12,12 +12,14 @@ var WaveEnemyCounts: Array[int] = []
 # defines all enemymodels (enemies actually) to call FIFO
 var WaveEnemyModels: Array[WaveManagerEnemyModel] = []
 
+var SpawnedEnemies: Array[BaseEnemy] = []
+
 func _ready() -> void:
 	GetSpawnPoints()
 	
 	WaveEnemyCounts = [
-		2
-#		,3
+		2,
+		3
 	]
 	
 	WaveEnemyModels = [
@@ -35,6 +37,11 @@ func _ready() -> void:
 func OnStart() -> void:
 	Spawn()
 
+func _process(delta: float) -> void:
+	if SpawnedEnemies.size() <= 0:
+		Spawn()
+	pass
+
 func GetSpawnPoints() -> void:
 	SpawnPoints.clear()
 	
@@ -43,8 +50,9 @@ func GetSpawnPoints() -> void:
 			SpawnPoints.append(child as Node2D)
 
 func Spawn() -> void:
-	for WaveEnemyCount in WaveEnemyCounts:
-		for i in WaveEnemyCount:
+	if WaveEnemyCounts.size() > 0:
+		var waveEnemyCount: int = WaveEnemyCounts.pop_front()
+		for i in waveEnemyCount:
 			var model: WaveManagerEnemyModel = WaveEnemyModels.pop_front()
 			
 			var rope: Rope = ROPE.instantiate()
@@ -55,3 +63,12 @@ func Spawn() -> void:
 			rope.RollbackAndDestroyPointY = model.SpawnPoint.global_position.y
 			rope.DestinationPointY = model.SpawnPoint.get_child(0).global_position.y #DestinationPoint
 			rope.EnemyDefaultGun = model.Gun
+			
+			rope.OnEnemyCreated.connect(EnemySpawned)
+
+func EnemySpawned(enemy: BaseEnemy):
+	SpawnedEnemies.append(enemy)
+	enemy.OnKilled.connect(EnemyDied)
+
+func EnemyDied(enemy: BaseEnemy):
+	SpawnedEnemies.erase(enemy)

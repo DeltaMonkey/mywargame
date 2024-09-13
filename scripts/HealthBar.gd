@@ -5,7 +5,7 @@ extends ProgressBar
 
 func _ready():
 	value = Player.CurrentHealth * 100 / Player.MaxHealth
-	Player.HealthChanged.connect(update)
+	Player.OnHealthChanged.connect(update)
 	
 func update():
 	value = Player.CurrentHealth * 100 / Player.MaxHealth
