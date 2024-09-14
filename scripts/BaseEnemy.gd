@@ -38,7 +38,7 @@ var JumpRandom: RandomNumberGenerator = RandomNumberGenerator.new()
 var IsAlertModeOn: bool = false;
 var IsEnemyShouldDelayToShoot: bool = true
 var IsStopEnemyMovementProcessForce: bool = false
-var EnemyRopeSlidingDestinationPointY: int = 0
+var EnemyRopeSlidingDestinationPointY: float = 0.0
 var CheckEnemyRopeSlidingDestinationPointY: bool = false
 var JumpSheet: Array[bool] = [] #JumpSheet has three size but one of them must be false
 
@@ -183,12 +183,12 @@ func StartEnemyMovementProcessForce() -> void:
 	IsStopEnemyMovementProcessForce = false
 	EnableCollisionAndRaygcasts()
 
-func SlideWithRope(destination_point_y: int, Rope_OnTheRopeReleased: Signal) -> void:
+func SlideWithRope(destinationPointY: float, Rope_OnTheRopeReleased: Signal) -> void:
 	velocity.y += 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * ROPE_SLIDE_SPEED
 	
-	EnemyRopeSlidingDestinationPointY = destination_point_y
+	EnemyRopeSlidingDestinationPointY = destinationPointY
 	CheckEnemyRopeSlidingDestinationPointY = true
 	
 	Rope_OnTheRopeReleased.connect(OnTheRopeReleased)

@@ -34,7 +34,6 @@ func InitilizeCharacter(
 	AnimatedSprite2DNodeBaseCharacter = animatedSprite2DNode
 	DirectionContainerNodeBaseCharacter = directionContainerNode
 	CollectedGunContainerNodeBaseCharacter = collectedGunContainerNode
-	var x = is_in_group(Constants.GROUPS_PLAYER)
 	CollectedDefaultGun = collectedDefaultGun
 
 func TakeDamage(damage: int) -> void:

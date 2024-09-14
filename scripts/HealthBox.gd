@@ -9,7 +9,7 @@ extends Area2D
 #VARS
 var collisions: Array[BasePlayer] = []
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(collisions.size() > 0):
 		for player: BasePlayer in collisions:
 			if player.CurrentHealth < player.MaxHealth:

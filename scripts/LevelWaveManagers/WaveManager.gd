@@ -4,27 +4,19 @@ const GUN1 = preload("res://scenes/Guns/Collected/CollectedGunPistol.tscn")
 const GUN2 = preload("res://scenes/Guns/Collected/CollectedGunAssaultRifle.tscn")
 const ROPE = preload("res://scenes/Rope.tscn")
 
+var NextLevel: PackedScene;
 var SpawnPoints: Array[Node2D] = []
 
-# defines how many enemy I should pop_front from WaveEnemyModels
-var WaveEnemyCounts: Array[int] = [] 
-
-# defines all enemymodels (enemies actually) to call FIFO
-var WaveEnemyModels: Array[WaveManagerEnemyModel] = []
-
+var WaveEnemyCounts: Array[int] = []  # defines how many enemy I should pop_front from WaveEnemyModels
+var WaveEnemyModels: Array[WaveManagerEnemyModel] = [] # defines all enemymodels (enemies actually) to call FIFO
 var SpawnedEnemies: Array[BaseEnemy] = []
-
 var Initilized: bool = false
 
 func InitilizeWaveManager():
 	GetSpawnPoints()
 	Initilized = true
 
-func OnStart() -> void:
-	if Initilized:
-		Spawn()
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if SpawnedEnemies.size() <= 0 && Initilized:
 		Spawn()
 
@@ -51,7 +43,10 @@ func Spawn() -> void:
 			rope.EnemyDefaultGun = model.Gun
 			
 			rope.OnEnemyCreated.connect(EnemySpawned)
-
+	else:
+		#Next level time
+		get_tree().change_scene_to_packed(NextLevel)
+		
 func EnemySpawned(enemy: BaseEnemy):
 	SpawnedEnemies.append(enemy)
 	enemy.OnKilled.connect(EnemyDied)

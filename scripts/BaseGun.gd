@@ -42,6 +42,6 @@ func Shoot(direction: int) -> int:
 		
 		bullet.global_position = MuzzleNodeBaseGun.global_position
 		
-		get_tree().get_root().add_child(bullet)
+		get_tree().get_root().get_node("Game").add_child(bullet)
 		
 	return BulletCount

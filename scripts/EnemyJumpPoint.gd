@@ -42,8 +42,8 @@ func _physics_process(delta) -> void:
 			# this calculation important for ratio, it is just basic numeric calc
 			followPath2D.progress_ratio += 1 * jumpVelocity * delta
 			if(followPath2D.progress_ratio >= 1 - (jumpVelocity * delta)):
-				var tree_root = get_tree().get_root()
-				enemy.ReparentNode = tree_root
+				var game_node = get_tree().get_root().get_node("Game")
+				enemy.ReparentNode = game_node
 				# We are getting sure with DeleteOldParentNodeRef
 				# that we changed enemy parent to root and
 				# now we can remove the floowPath the enemy created to jump

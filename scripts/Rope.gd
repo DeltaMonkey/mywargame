@@ -6,8 +6,8 @@ const ROLLBACK_SPEED: int = 60
 const ENEMY: PackedScene = preload("res://scenes/Enemy.tscn")
 
 #@ONREADIES
-@export var DestinationPointY: int = 0
-@export var RollbackAndDestroyPointY: int = 0
+@export var DestinationPointY: float = 0.0
+@export var RollbackAndDestroyPointY: float = 0.0
 @export var EnemyDefaultGun: PackedScene = null;
 
 #VARS

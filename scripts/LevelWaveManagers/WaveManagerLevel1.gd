@@ -1,5 +1,7 @@
 class_name WaveManagerLevel1 extends BaseWaveManager
 
+var LEVEL_2 = preload("res://scenes/Level2.tscn")
+
 func _ready() -> void:
 	InitilizeWaveManager()
 	
@@ -19,3 +21,6 @@ func _ready() -> void:
 	]
 	
 	call_deferred("OnStart")
+	
+func OnStart():
+	NextLevel = LEVEL_2
