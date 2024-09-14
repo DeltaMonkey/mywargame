@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uc64rohsobm8"]
+
+[ext_resource type="Script" path="res://scripts/LevelWaveManagers/WaveManagerLevel1.gd" id="1_vjnwc"]
+
+[node name="WaveManagerLevel1" type="Node"]
+script = ExtResource("1_vjnwc")

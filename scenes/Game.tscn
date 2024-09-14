@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPointRight.tscn" id="9_cbnfm"]
 [ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="13_cy02n"]
-[ext_resource type="Script" path="res://scripts/WaveManager.gd" id="15_n25oc"]
+[ext_resource type="PackedScene" uid="uid://uc64rohsobm8" path="res://scenes/WaveManagerLevel1.tscn" id="14_p3yxp"]
 [ext_resource type="PackedScene" uid="uid://picsijt3uj86" path="res://scenes/CollectableSpawner.tscn" id="15_xm4pw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
@@ -112,23 +112,22 @@ Player = NodePath("../../Player")
 [node name="CollectableSpawner" parent="CollectableSpawners" instance=ExtResource("15_xm4pw")]
 position = Vector2(62, 72)
 
-[node name="WaveManager" type="Node" parent="."]
-script = ExtResource("15_n25oc")
+[node name="WaveManagerLevel1" parent="." instance=ExtResource("14_p3yxp")]
 
-[node name="SpawnPoint1" type="Node2D" parent="WaveManager"]
+[node name="SpawnPoint1" type="Node2D" parent="WaveManagerLevel1"]
 position = Vector2(30, -11)
 
-[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint1"]
+[node name="DestinationPoint" type="Node2D" parent="WaveManagerLevel1/SpawnPoint1"]
 position = Vector2(0, 107)
 
-[node name="SpawnPoint2" type="Node2D" parent="WaveManager"]
+[node name="SpawnPoint2" type="Node2D" parent="WaveManagerLevel1"]
 position = Vector2(103, -11)
 
-[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint2"]
+[node name="DestinationPoint" type="Node2D" parent="WaveManagerLevel1/SpawnPoint2"]
 position = Vector2(0, 107)
 
-[node name="SpawnPoint3" type="Node2D" parent="WaveManager"]
+[node name="SpawnPoint3" type="Node2D" parent="WaveManagerLevel1"]
 position = Vector2(175, -11)
 
-[node name="DestinationPoint" type="Node2D" parent="WaveManager/SpawnPoint3"]
+[node name="DestinationPoint" type="Node2D" parent="WaveManagerLevel1/SpawnPoint3"]
 position = Vector2(0, 107)

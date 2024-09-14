@@ -14,33 +14,19 @@ var WaveEnemyModels: Array[WaveManagerEnemyModel] = []
 
 var SpawnedEnemies: Array[BaseEnemy] = []
 
-func _ready() -> void:
+var Initilized: bool = false
+
+func InitilizeWaveManager():
 	GetSpawnPoints()
-	
-	WaveEnemyCounts = [
-		2,
-		3
-	]
-	
-	WaveEnemyModels = [
-		#WAVE 1
-		WaveManagerEnemyModel.new(GUN1, SpawnPoints[0]),
-		WaveManagerEnemyModel.new(GUN1, SpawnPoints[2]),
-		#WAVE 2
-		WaveManagerEnemyModel.new(GUN1, SpawnPoints[0]),
-		WaveManagerEnemyModel.new(GUN2, SpawnPoints[1]),
-		WaveManagerEnemyModel.new(GUN1, SpawnPoints[2]),
-	]
-	
-	call_deferred("OnStart")
-	
+	Initilized = true
+
 func OnStart() -> void:
-	Spawn()
+	if Initilized:
+		Spawn()
 
 func _process(delta: float) -> void:
-	if SpawnedEnemies.size() <= 0:
+	if SpawnedEnemies.size() <= 0 && Initilized:
 		Spawn()
-	pass
 
 func GetSpawnPoints() -> void:
 	SpawnPoints.clear()
