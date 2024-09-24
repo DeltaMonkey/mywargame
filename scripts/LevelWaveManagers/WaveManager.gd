@@ -2,6 +2,7 @@ class_name BaseWaveManager extends Node
 
 const GUN1 = preload("res://scenes/Guns/Collected/CollectedGunPistol.tscn")
 const GUN2 = preload("res://scenes/Guns/Collected/CollectedGunAssaultRifle.tscn")
+const GUN3 = preload("res://scenes/Guns/Collected/CollectedGunShotGun.tscn") #TODO: NEED TO USE
 const ROPE = preload("res://scenes/Rope.tscn")
 
 var NextLevel: PackedScene;

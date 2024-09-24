@@ -10,6 +10,7 @@ var CollectableList: Array[PackedScene] = []
 func _ready() -> void:
 	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunAssaultRifle.tscn"))
 	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunPistol.tscn"))
+	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunShotGun.tscn"))
 	CollectableList.append(preload("res://scenes/HealthBox.tscn"))
 	
 	SpawnTimer.connect("timeout", SpawnCollectable)

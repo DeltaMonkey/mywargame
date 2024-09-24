@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://2dsdnk3085wv"]
+[gd_scene load_steps=5 format=3 uid="uid://uylt7ee68dsr"]
 
-[ext_resource type="Script" path="res://scripts/CollectedGunAssaultRifle.gd" id="1_gy6eb"]
-[ext_resource type="Texture2D" uid="uid://cmedd3r0t2ba8" path="res://assets/sprites/Guns/Shotgun/ShotGunEquipped.png" id="2_7gi8a"]
+[ext_resource type="Script" path="res://scripts/CollectedGunShotGun.gd" id="1_wqx58"]
+[ext_resource type="Texture2D" uid="uid://cmedd3r0t2ba8" path="res://assets/sprites/Guns/Shotgun/ShotGunEquipped.png" id="2_f8706"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eiddi"]
-atlas = ExtResource("2_7gi8a")
+atlas = ExtResource("2_f8706")
 region = Rect2(0, 0, 8, 4)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yu38x"]
@@ -18,16 +18,17 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="CollectedGunAssaultRifle" type="Node2D"]
-script = ExtResource("1_gy6eb")
+[node name="CollectedGunShotGun" type="Node2D"]
+script = ExtResource("1_wqx58")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.5, 0)
 sprite_frames = SubResource("SpriteFrames_yu38x")
+autoplay = "default"
 
 [node name="Muzzle" type="Node2D" parent="."]
-position = Vector2(4, -1)
+position = Vector2(5, -1)
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.8
 one_shot = true
