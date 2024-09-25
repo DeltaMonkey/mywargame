@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ca7pfn6hhq15k" path="res://assets/sprites/Guns/AssaultRifle/assaultRifleProjectile.png" id="2_xatwp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6i64r"]
-size = Vector2(4, 8)
+size = Vector2(2, 1)
 
 [node name="ProjectileAssaultRifle" type="Area2D"]
 collision_layer = 4

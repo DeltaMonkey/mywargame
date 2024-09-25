@@ -1,8 +1,8 @@
-class_name ProjectileShotGun extends BaseProjectile
+class_name ProjectileRocketExplotion extends BaseProjectile
 
 #CONSTS
-const SPEED: float = 200;
-const DAMAGE: int = 5;
+const SPEED: float = 0;
+const DAMAGE: int = 10;
 
 #@ONREADIES
 @onready var DestroyBulletTimerNode = $DestroyBulletTimer
@@ -14,5 +14,5 @@ func _ready():
 	super()
 
 func _process(delta):
-	
 	super(delta)
+	

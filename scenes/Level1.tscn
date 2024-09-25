@@ -62,8 +62,24 @@ position = Vector2(46, 73)
 position = Vector2(82, 73)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
-process_mode = 4
-visible = false
+position = Vector2(163, 100)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_bgln3")]
+position = Vector2(171, 100)
+
+[node name="Enemy3" parent="." instance=ExtResource("5_bgln3")]
+position = Vector2(159, 100)
+
+[node name="Enemy4" parent="." instance=ExtResource("5_bgln3")]
+position = Vector2(175, 100)
+
+[node name="Enemy5" parent="." instance=ExtResource("5_bgln3")]
+position = Vector2(179, 100)
+
+[node name="Enemy6" parent="." instance=ExtResource("5_bgln3")]
+position = Vector2(183, 100)
+
+[node name="Enemy7" parent="." instance=ExtResource("5_bgln3")]
 position = Vector2(167, 100)
 
 [node name="EnemyJumpPointLeft" parent="." instance=ExtResource("6_wafki")]

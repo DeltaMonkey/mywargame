@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://4siiv3h1nge"]
+
+[ext_resource type="Script" path="res://scripts/ProjectileRocketExplotion.gd" id="1_l1upw"]
+[ext_resource type="Texture2D" uid="uid://dgnsn8ncritr6" path="res://assets/sprites/Guns/RocketLauncher/RocketLauncherRocketExplosion.png" id="2_herl0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5h42"]
+radius = 8.0
+
+[node name="ProjectileRocketExplotion" type="Area2D"]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource("1_l1upw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o5h42")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("2_herl0")
+
+[node name="DestroyBulletTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true

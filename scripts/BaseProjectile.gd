@@ -40,6 +40,7 @@ func DestroyBulletCuzTimerOut() -> void:
 	queue_free()
 
 func ProjectileHit(body) -> void:
+	print(name)
 	if(body.is_in_group(Constants.GROUPS_PLAYER) ||body.is_in_group(Constants.GROUPS_ENEMY)):
 		var character: BaseCharacter = body as BaseCharacter;
 		character.TakeDamage(Damage)

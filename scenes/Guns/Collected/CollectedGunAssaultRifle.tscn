@@ -1,21 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://2dsdnk3085wv"]
 
 [ext_resource type="Script" path="res://scripts/CollectedGunAssaultRifle.gd" id="1_gy6eb"]
-[ext_resource type="Texture2D" uid="uid://cmedd3r0t2ba8" path="res://assets/sprites/Guns/Shotgun/ShotGunEquipped.png" id="2_7gi8a"]
+[ext_resource type="Texture2D" uid="uid://b74hmx4jbnge5" path="res://assets/sprites/Guns/AssaultRifle/assaultRifleEq.png" id="2_bkm67"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eiddi"]
-atlas = ExtResource("2_7gi8a")
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7wp0"]
+atlas = ExtResource("2_bkm67")
 region = Rect2(0, 0, 8, 4)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yu38x"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eiddi")
+"texture": SubResource("AtlasTexture_j7wp0")
 }],
 "loop": true,
 "name": &"default",
-"speed": 1.0
+"speed": 2.0
 }]
 
 [node name="CollectedGunAssaultRifle" type="Node2D"]
@@ -24,6 +24,7 @@ script = ExtResource("1_gy6eb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.5, 0)
 sprite_frames = SubResource("SpriteFrames_yu38x")
+autoplay = "default"
 
 [node name="Muzzle" type="Node2D" parent="."]
 position = Vector2(4, -1)

@@ -8,10 +8,11 @@ var CurrentSpawnedItem: Node2D
 var CollectableList: Array[PackedScene] = []  
 
 func _ready() -> void:
-	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunAssaultRifle.tscn"))
-	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunPistol.tscn"))
-	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunShotGun.tscn"))
-	CollectableList.append(preload("res://scenes/HealthBox.tscn"))
+	#CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunAssaultRifle.tscn"))
+	#CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunPistol.tscn"))
+	#CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunShotGun.tscn"))
+	#CollectableList.append(preload("res://scenes/HealthBox.tscn"))
+	CollectableList.append(preload("res://scenes/Guns/Collectable/CollectableGunRocketLauncher.tscn"))
 	
 	SpawnTimer.connect("timeout", SpawnCollectable)
 	SpawnCollectable()

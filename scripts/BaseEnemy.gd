@@ -103,6 +103,7 @@ func _physics_process(delta) -> void:
 				IsEnemyShouldDelayToShoot = false
 			else:
 				Shoot()
+				pass
 			
 	move_and_slide()
 	DeleteOldParentNodeIfNotNull() #ReparentIfReparentNodeNotNull dan önce çalışmalı ki bir sonraki elde silsin
@@ -133,6 +134,7 @@ func TimeToWalk() -> void:
 
 func Shoot() -> void:
 	super()
+	pass
 
 func ReparentIfReparentNodeNotNull(deleteOldParentNode: Node2D = null) -> void:
 	if ReparentNode:
@@ -234,6 +236,7 @@ func _on_TimerToAlert_timeout() -> void:
 
 func _on_TimerShockToShoot_timeout() -> void:
 	Shoot()
+	pass
 
 func JumpRequest() -> bool:
 	var jumpWillHappen = JumpWillHappen()
