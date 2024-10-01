@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b03105iay7qss"]
+
+[ext_resource type="Script" path="res://scripts/CollectedGunMiniGun.gd" id="1_bgw5v"]
+[ext_resource type="Texture2D" uid="uid://cst1yrpe1g2wr" path="res://assets/sprites/Guns/MiniGun/MiniGunEquipped.png" id="2_sowan"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yct8w"]
+atlas = ExtResource("2_sowan")
+region = Rect2(0, 0, 8, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iscok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yct8w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="CollectedGunFlameGun" type="Node2D"]
+script = ExtResource("1_bgw5v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.5, 2)
+sprite_frames = SubResource("SpriteFrames_iscok")
+offset = Vector2(-1, -1)
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(7, 1)
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

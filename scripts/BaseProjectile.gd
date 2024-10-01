@@ -31,7 +31,8 @@ func InitiateProjectile(
 
 func _ready() -> void:
 	connect("body_entered", ProjectileHit)
-	DestroyBulletTimerNodeBaseProjectile.connect("timeout", DestroyBulletCuzTimerOut)
+	if DestroyBulletTimerNodeBaseProjectile:
+		DestroyBulletTimerNodeBaseProjectile.connect("timeout", DestroyBulletCuzTimerOut)
 
 func _process(delta) -> void:
 	move_local_x(Direction *  Speed * delta)

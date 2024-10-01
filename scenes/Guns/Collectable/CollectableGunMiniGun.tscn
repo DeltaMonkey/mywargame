@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq6a85b1vrl"]
+[gd_scene load_steps=7 format=3 uid="uid://or4gbs01hax5"]
 
-[ext_resource type="Script" path="res://scripts/CollectableGunRocketLauncher.gd" id="1_a43cg"]
-[ext_resource type="Texture2D" uid="uid://bjy8p7tcg0r4n" path="res://assets/sprites/Guns/RocketLauncher/RocketLauncher.png" id="1_bi17p"]
+[ext_resource type="Script" path="res://scripts/CollectableGunMiniGun.gd" id="1_jud8i"]
+[ext_resource type="Texture2D" uid="uid://bmv072whgy536" path="res://assets/sprites/Guns/MiniGun/MiniGun.png" id="2_kqduq"]
 
 [sub_resource type="Animation" id="Animation_53kwu"]
 length = 0.001
@@ -40,21 +40,21 @@ _data = {
 "Swing": SubResource("Animation_jbjrf")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s186c"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkq6h"]
 size = Vector2(5, 7)
 
-[node name="CollectableGunRocketLauncher" type="Area2D"]
-script = ExtResource("1_a43cg")
+[node name="CollectableGunMiniGun" type="Area2D"]
+script = ExtResource("1_jud8i")
 
-[node name="CollisionShape2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -0.785398
-texture = ExtResource("1_bi17p")
+texture = ExtResource("2_kqduq")
 
-[node name="CollisionShape2D3" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_v1rvc")
 }
 autoplay = "Swing"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_s186c")
+shape = SubResource("RectangleShape2D_bkq6h")

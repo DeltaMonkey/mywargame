@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn7eis106eeq4"]
+
+[ext_resource type="Script" path="res://scripts/ProjectileMiniGun.gd" id="1_4vamj"]
+[ext_resource type="Texture2D" uid="uid://bm8lafrvyuvly" path="res://assets/sprites/Guns/MiniGun/ProjectileMiniGun.png" id="2_83olo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nl4cx"]
+size = Vector2(1, 1)
+
+[node name="ProjectileMiniGun" type="Area2D"]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource("1_4vamj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_nl4cx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("2_83olo")
+
+[node name="DestroyBulletTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true

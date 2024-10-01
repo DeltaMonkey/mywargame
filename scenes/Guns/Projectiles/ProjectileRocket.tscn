@@ -20,5 +20,5 @@ position = Vector2(1, 1)
 texture = ExtResource("2_d6y6y")
 
 [node name="DestroyBulletTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 0.05
 autostart = true
