@@ -1,4 +1,4 @@
-extends s
+extends BaseCollectableGun
 
 #CONSTS
 const ROCKET_LAUNCHER_COLLECTED_GUN = preload("res://scenes/Guns/Collected/CollectedGunRocketLauncher.tscn")
