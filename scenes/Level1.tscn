@@ -1,8 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://dhcudf7vpw8nn"]
 
 [ext_resource type="Texture2D" uid="uid://bcx5sx1gbkjga" path="res://assets/sprites/Tileset/brownBlock.png" id="1_eb77v"]
-[ext_resource type="PackedScene" uid="uid://d36v0cr3tix7x" path="res://scenes/Player.tscn" id="1_ycufs"]
-[ext_resource type="Script" path="res://scripts/FollowCam.gd" id="3_2j87v"]
 [ext_resource type="PackedScene" uid="uid://cyeha5447d6vs" path="res://scenes/Guns/Collectable/CollectableGunAssaultRifle.tscn" id="3_b5172"]
 [ext_resource type="PackedScene" uid="uid://cpr5x1j62pg8n" path="res://scenes/Guns/Collectable/CollectableGunPistol.tscn" id="3_qu145"]
 [ext_resource type="PackedScene" uid="uid://b075hic5laxks" path="res://scenes/Enemy.tscn" id="5_bgln3"]
@@ -12,10 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://f2824qcquvh7" path="res://scenes/EnemyLongJumpPointRight.tscn" id="9_cbnfm"]
 [ext_resource type="PackedScene" uid="uid://dt3mv2uvh5nea" path="res://scenes/ladder.tscn" id="12_wd1d0"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="13_cy02n"]
+[ext_resource type="PackedScene" uid="uid://c6xrp5vernbr6" path="res://scenes/PlayerWithParachute.tscn" id="13_mxotv"]
+[ext_resource type="PackedScene" uid="uid://bjobq06yxc628" path="res://scenes/Guns/Collected/CollectedGunPistol.tscn" id="14_m6niq"]
 [ext_resource type="PackedScene" uid="uid://uc64rohsobm8" path="res://scenes/WaveManagerLevel1.tscn" id="14_p3yxp"]
 [ext_resource type="PackedScene" uid="uid://picsijt3uj86" path="res://scenes/CollectableSpawner.tscn" id="15_xm4pw"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tiy31"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dtw0r"]
 texture = ExtResource("1_eb77v")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
@@ -25,7 +25,7 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 13
-sources/0 = SubResource("TileSetAtlasSource_tiy31")
+sources/0 = SubResource("TileSetAtlasSource_dtw0r")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3bc8"]
 bg_color = Color(0, 0, 0, 1)
@@ -41,16 +41,11 @@ tile_map_data = PackedByteArray("AAD//wcAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAA
 tile_set = SubResource("TileSet_wpaav")
 rendering_quadrant_size = 8
 
-[node name="Player" parent="." instance=ExtResource("1_ycufs")]
-position = Vector2(23, 88)
-
-[node name="FollowCam" type="Camera2D" parent="Player" node_paths=PackedStringArray("TileMapLayerNode")]
-limit_left = 0
-limit_top = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 7.0
-script = ExtResource("3_2j87v")
-TileMapLayerNode = NodePath("../../TileMap")
+[node name="PlayerWithParachute" parent="." node_paths=PackedStringArray("TileMapLayerNode") instance=ExtResource("13_mxotv")]
+position = Vector2(16, 55)
+DestinationPointY = 100.0
+PlayerDefaultGun = ExtResource("14_m6niq")
+TileMapLayerNode = NodePath("../TileMap")
 
 [node name="PistolCollectable" parent="." instance=ExtResource("3_qu145")]
 position = Vector2(161, 98)
@@ -62,25 +57,9 @@ position = Vector2(46, 73)
 position = Vector2(82, 73)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bgln3")]
+process_mode = 4
+visible = false
 position = Vector2(163, 100)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(171, 100)
-
-[node name="Enemy3" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(159, 100)
-
-[node name="Enemy4" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(175, 100)
-
-[node name="Enemy5" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(179, 100)
-
-[node name="Enemy6" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(183, 100)
-
-[node name="Enemy7" parent="." instance=ExtResource("5_bgln3")]
-position = Vector2(167, 100)
 
 [node name="EnemyJumpPointLeft" parent="." instance=ExtResource("6_wafki")]
 position = Vector2(96, 104)
@@ -107,7 +86,7 @@ position = Vector2(0, 16)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("Player")]
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -121,7 +100,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_30b1b")
 value = 50.0
 show_percentage = false
 script = ExtResource("13_cy02n")
-Player = NodePath("../../Player")
 
 [node name="CollectableSpawners" type="Node2D" parent="."]
 

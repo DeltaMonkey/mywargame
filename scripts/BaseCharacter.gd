@@ -87,9 +87,8 @@ func EquipGun(gunToCollect: PackedScene) -> void:
 		EquippedGun.queue_free()
 		
 	EquippedGun = gunToCollect.instantiate() as BaseGun;
-	print(EquippedGun.name)
-	
 	CollectedGunContainerNodeBaseCharacter.add_child(EquippedGun)
+	EquippedGun.ShootCooldownTimerNodeBaseGun.start.call_deferred()
 
 func Shoot() -> void:
 	if(EquippedGun):

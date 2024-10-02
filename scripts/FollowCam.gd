@@ -1,10 +1,9 @@
-extends Camera2D
+class_name FollowCam extends Camera2D
 
 #@EXPORTS
 @export var TileMapLayerNode: TileMapLayer
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func InitilizeFollowCam():
 	var mapRectSize = TileMapLayerNode.get_used_rect().size
 	var tileSize = TileMapLayerNode.rendering_quadrant_size
 	var worldSizeInPixels = mapRectSize * tileSize

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6xrp5vernbr6"]
+
+[ext_resource type="Script" path="res://scripts/PlayerWithParachute.gd" id="1_bvuwu"]
+[ext_resource type="Texture2D" uid="uid://01x88hw2amjq" path="res://assets/drawings/player_blue_parachute.png" id="1_oo530"]
+[ext_resource type="Script" path="res://scripts/FollowCam.gd" id="3_261tc"]
+
+[node name="PlayerWithParachute" type="Node2D"]
+script = ExtResource("1_bvuwu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
+texture = ExtResource("1_oo530")
+offset = Vector2(0.5, 0)
+
+[node name="FollowCam" type="Camera2D" parent="."]
+script = ExtResource("3_261tc")

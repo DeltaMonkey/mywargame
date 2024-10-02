@@ -9,6 +9,7 @@ const COLLECTED_GUN_DEFAULT: PackedScene = preload("res://scenes/Guns/Collected/
 @onready var DirectionContainerNode = $DirectionContainer as Node2D
 @onready var CollectedGunContainerNode = $DirectionContainer/CollectedGunConatiner as Node2D
 @onready var AnimatedSprite2DNode = $DirectionContainer/AnimatedSprite2D as AnimatedSprite2D
+@onready var FollowCamNode: FollowCam = $FollowCam
 
 #VARS
 var LaddersColliding: Array[bool] = [];
@@ -72,3 +73,10 @@ func LaddersCollidingPopFirst() -> void:
 		BlockAnimationPlay = false
 		ClimbedToLadder = false
 		CollectedGunContainerNode.visible = true
+		
+func SetDefaultGun(gunPackedScene: PackedScene) -> void:
+	CollectedDefaultGun = gunPackedScene
+
+func SetFollowCamTileMapAndInitCam(tileMapLayerNode: TileMapLayer):
+	FollowCamNode.TileMapLayerNode = tileMapLayerNode
+	FollowCamNode.InitilizeFollowCam()

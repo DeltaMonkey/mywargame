@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://d36v0cr3tix7x"]
+[gd_scene load_steps=14 format=3 uid="uid://d36v0cr3tix7x"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_4c34j"]
 [ext_resource type="Texture2D" uid="uid://fsngp8tcup1k" path="res://assets/sprites/BluePlayer/playerBlueLadder.png" id="2_fh64c"]
 [ext_resource type="Texture2D" uid="uid://dw21ilk7s278o" path="res://assets/sprites/BluePlayer/playerBlueSpriteSheet.png" id="2_gmstn"]
+[ext_resource type="Script" path="res://scripts/FollowCam.gd" id="4_rlgja"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ld8o"]
 atlas = ExtResource("2_fh64c")
@@ -101,3 +102,10 @@ offset = Vector2(0.5, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_t8iil")
+
+[node name="FollowCam" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+script = ExtResource("4_rlgja")
